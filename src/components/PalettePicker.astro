@@ -1,0 +1,44 @@
+---
+const palettes = [
+	{ id: 'blue', label: 'Blue Shift', swatch: '#31478a' },
+	{ id: 'legacy', label: 'Legacy', swatch: '#5f318a' },
+	{ id: 'mclaren', label: 'McLaren', swatch: '#ff8000' },
+	{ id: 'synthwave', label: 'Synthwave', swatch: '#ff2d95' },
+];
+---
+<div
+	id="palette-picker"
+	class="fixed bottom-4 right-4 z-50 flex items-center gap-1 rounded-full border border-white/15 bg-black/70 p-1 backdrop-blur"
+>
+	{palettes.map((p) => (
+		<button
+			type="button"
+			data-palette-option={p.id}
+			aria-label={`Paleta ${p.label}`}
+			title={p.label}
+			class="h-7 w-7 rounded-full border-2 border-transparent transition data-[active=true]:border-white"
+			style={{ backgroundColor: p.swatch }}
+		></button>
+	))}
+</div>
+
+<script>
+	const STORAGE_KEY = 'tecton-palette';
+	const picker = document.getElementById('palette-picker');
+	const buttons = picker?.querySelectorAll<HTMLButtonElement>('[data-palette-option]');
+
+	function applyPalette(id: string) {
+		document.documentElement.dataset.palette = id;
+		localStorage.setItem(STORAGE_KEY, id);
+		buttons?.forEach((btn) => {
+			btn.dataset.active = String(btn.dataset.paletteOption === id);
+		});
+		window.dispatchEvent(new CustomEvent('palettechange', { detail: { id } }));
+	}
+
+	const current = document.documentElement.dataset.palette || 'blue';
+	buttons?.forEach((btn) => {
+		btn.dataset.active = String(btn.dataset.paletteOption === current);
+		btn.addEventListener('click', () => applyPalette(btn.dataset.paletteOption!));
+	});
+</script>

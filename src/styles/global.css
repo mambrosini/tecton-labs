@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: var(--pal-brand-50);
+  --color-brand-100: var(--pal-brand-100);
+  --color-brand-200: var(--pal-brand-200);
+  --color-brand-400: var(--pal-brand-400);
+  --color-brand-500: var(--pal-brand-500);
+  --color-brand-600: var(--pal-brand-600);
+  --color-brand-700: var(--pal-brand-700);
+  --color-brand-900: var(--pal-brand-900);
+  --color-ink-950: var(--pal-ink-950);
+  --color-silver-300: var(--pal-silver-300);
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono-brand: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* palette tokens: swapped at runtime via [data-palette] on <html> (see PalettePicker.astro) */
+:root,
+[data-palette='blue'] {
+  --pal-brand-50: #f1f8fb;
+  --pal-brand-100: #e1eff6;
+  --pal-brand-200: #b3e9eb;
+  --pal-brand-400: #768cb8;
+  --pal-brand-500: #31478a;
+  --pal-brand-600: #283a70;
+  --pal-brand-700: #213059;
+  --pal-brand-900: #263d50;
+  --pal-ink-950: #233849;
+  --pal-silver-300: #d1d5db;
+}
+
+[data-palette='legacy'] {
+  --pal-brand-50: #f2f1fb;
+  --pal-brand-100: #e3e1f6;
+  --pal-brand-200: #b3beeb;
+  --pal-brand-400: #9376b8;
+  --pal-brand-500: #5f318a;
+  --pal-brand-600: #4d2870;
+  --pal-brand-700: #3d2159;
+  --pal-brand-900: #2f2650;
+  --pal-ink-950: #2b2349;
+  --pal-silver-300: #d1d5db;
+}
+
+[data-palette='mclaren'] {
+  --pal-brand-50: #fff4ea;
+  --pal-brand-100: #ffe4cc;
+  --pal-brand-200: #ffc999;
+  --pal-brand-400: #ff9f4d;
+  --pal-brand-500: #ff8000;
+  --pal-brand-600: #cc6600;
+  --pal-brand-700: #a34d00;
+  --pal-brand-900: #5c2b00;
+  --pal-ink-950: #15181f;
+  --pal-silver-300: #d1d5db;
+}
+
+[data-palette='synthwave'] {
+  --pal-brand-50: #fff0f8;
+  --pal-brand-100: #ffd6ec;
+  --pal-brand-200: #ffb3e0;
+  --pal-brand-400: #ff5fb8;
+  --pal-brand-500: #ff2d95;
+  --pal-brand-600: #cc1f78;
+  --pal-brand-700: #99165a;
+  --pal-brand-900: #5c0f39;
+  --pal-ink-950: #170928;
+  --pal-silver-300: #d1d5db;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: #e5e7eb;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}

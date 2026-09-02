@@ -1,0 +1,17 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+{/* text-based wordmark (not an <img>) so the "E" accent bars can react live to the palette picker via bg-brand-500 */}
+<span class={`inline-flex items-center font-display font-medium uppercase leading-none tracking-[0.15em] text-white ${className}`} aria-hidden="true">
+	<span>T</span>
+	<span class="mx-[0.12em] flex h-[1em] flex-col justify-between py-[0.05em]">
+		<span class="h-[0.14em] w-[0.62em] rounded-sm bg-brand-500"></span>
+		<span class="h-[0.14em] w-[0.62em] rounded-sm bg-brand-500"></span>
+		<span class="h-[0.14em] w-[0.62em] rounded-sm bg-brand-500"></span>
+	</span>
+	<span>CTON</span>
+</span>

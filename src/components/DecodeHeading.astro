@@ -1,0 +1,82 @@
+---
+interface Props {
+	text: string;
+	id: string;
+	class?: string;
+}
+
+const { text, id, class: className = '' } = Astro.props;
+---
+<h1 id={id} class={className} data-decode-text={text}>{text}</h1>
+
+<script>
+	const CHARS = '!<>-_\\/[]{}—=+*^?#0101';
+	const TICK_MS = 16;
+
+	class TextScramble {
+		el: HTMLElement;
+		frame = 0;
+		timerId = 0;
+		queue: { from: string; to: string; start: number; end: number; char?: string }[] = [];
+
+		constructor(el: HTMLElement) {
+			this.el = el;
+			this.update = this.update.bind(this);
+		}
+
+		setText(newText: string) {
+			// lock the box height so mid-scramble reflows don't shift content below
+			const { height } = this.el.getBoundingClientRect();
+			this.el.style.minHeight = `${height}px`;
+			this.el.style.overflow = 'clip';
+
+			const oldText = this.el.textContent || '';
+			const length = Math.max(oldText.length, newText.length);
+			this.queue = [];
+			for (let i = 0; i < length; i++) {
+				const from = oldText[i] || '';
+				const to = newText[i] || '';
+				const start = Math.floor(Math.random() * 10);
+				const end = start + 6 + Math.floor(Math.random() * 12);
+				this.queue.push({ from, to, start, end });
+			}
+			clearTimeout(this.timerId);
+			this.frame = 0;
+			this.update();
+		}
+
+		update() {
+			let output = '';
+			let complete = 0;
+			for (const item of this.queue) {
+				if (this.frame >= item.end) {
+					complete++;
+					output += item.to;
+				} else if (this.frame >= item.start) {
+					if (!item.char || Math.random() < 0.15) {
+						item.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+					}
+					output += `<span class="text-brand-400">${item.char}</span>`;
+				} else {
+					output += item.from;
+				}
+			}
+			this.el.innerHTML = output;
+			if (complete < this.queue.length) {
+				this.frame++;
+				this.timerId = window.setTimeout(this.update, TICK_MS);
+			} else {
+				this.el.style.minHeight = '';
+				this.el.style.overflow = '';
+			}
+		}
+	}
+
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	document.querySelectorAll<HTMLElement>('[data-decode-text]').forEach((el) => {
+		const finalText = el.dataset.decodeText ?? el.textContent ?? '';
+		if (reduceMotion) return;
+		new TextScramble(el).setText(finalText);
+	});
+</script>
