@@ -25,9 +25,29 @@ const { text, id, class: className = '' } = Astro.props;
 		}
 
 		setText(newText: string) {
-			// lock the box height so mid-scramble reflows don't shift content below
-			const { height } = this.el.getBoundingClientRect();
-			this.el.style.minHeight = `${height}px`;
+			const finalText = newText || this.el.textContent || '';
+			const computed = getComputedStyle(this.el);
+			const measure = document.createElement('div');
+			measure.textContent = finalText;
+			measure.style.position = 'absolute';
+			measure.style.visibility = 'hidden';
+			measure.style.pointerEvents = 'none';
+			measure.style.whiteSpace = computed.whiteSpace || 'normal';
+			measure.style.display = computed.display || 'block';
+			measure.style.maxWidth = computed.maxWidth || '100%';
+			measure.style.width = computed.width || 'auto';
+			measure.style.font = computed.font;
+			measure.style.letterSpacing = computed.letterSpacing;
+			measure.style.lineHeight = computed.lineHeight;
+			measure.style.padding = computed.padding;
+			this.el.parentElement?.appendChild(measure);
+			const { width, height } = measure.getBoundingClientRect();
+			measure.remove();
+
+			// lock the final box geometry so the scramble keeps the same wrapping pattern instead of collapsing to one line
+			this.el.style.width = `${Math.ceil(width)}px`;
+			this.el.style.minHeight = `${Math.ceil(height)}px`;
+			this.el.style.display = 'block';
 			this.el.style.overflow = 'clip';
 
 			const oldText = this.el.textContent || '';
@@ -67,6 +87,7 @@ const { text, id, class: className = '' } = Astro.props;
 				this.timerId = window.setTimeout(this.update, TICK_MS);
 			} else {
 				this.el.style.minHeight = '';
+				this.el.style.width = '';
 				this.el.style.overflow = '';
 			}
 		}
