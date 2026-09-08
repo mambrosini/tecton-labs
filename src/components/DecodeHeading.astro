@@ -46,7 +46,7 @@ const { text, id, class: className = '' } = Astro.props;
 
 			// lock the final box geometry so the scramble keeps the same wrapping pattern instead of collapsing to one line
 			this.el.style.width = `${Math.ceil(width)}px`;
-			this.el.style.minHeight = `${Math.ceil(height)}px`;
+			this.el.style.height = `${Math.ceil(height)}px`;
 			this.el.style.display = 'block';
 			this.el.style.overflow = 'clip';
 
@@ -86,7 +86,7 @@ const { text, id, class: className = '' } = Astro.props;
 				this.frame++;
 				this.timerId = window.setTimeout(this.update, TICK_MS);
 			} else {
-				this.el.style.minHeight = '';
+				this.el.style.height = '';
 				this.el.style.width = '';
 				this.el.style.overflow = '';
 			}
