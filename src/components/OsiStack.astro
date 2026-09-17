@@ -1,0 +1,277 @@
+---
+type Layer = {
+	id: number;
+	label: string;
+	title: string;
+	description: string;
+	colors: { top: string; left: string; right: string };
+};
+
+const layers: Layer[] = [
+	{
+		id: 0,
+		label: '01',
+		title: 'Infraestructura & Cloud',
+		description:
+			'Arquitectura cloud en AWS, Azure y GCP. CI/CD, contenedores, IaC y automatización.',
+		colors: { top: '#121828', left: '#0a1018', right: '#060910' },
+	},
+	{
+		id: 1,
+		label: '02',
+		title: 'Datos & Seguridad',
+		description:
+			'Diseño de bases de datos, backups, gestión de secretos, SSL/TLS y estrategias de seguridad.',
+		colors: { top: '#161c2e', left: '#0e121e', right: '#080b14' },
+	},
+	{
+		id: 2,
+		label: '03',
+		title: 'Integraciones & APIs',
+		description:
+			'APIs REST y GraphQL, conexión con ERPs, plataformas de pago y servicios externos.',
+		colors: { top: '#1c1b21', left: '#121118', right: '#0a0a12' },
+	},
+	{
+		id: 3,
+		label: '04',
+		title: 'Aplicaciones Web & Móvil',
+		description:
+			'Productos digitales a medida: SaaS, portales, apps mobile y dashboards.',
+		colors: { top: '#231b18', left: '#171009', right: '#0e0906' },
+	},
+	{
+		id: 4,
+		label: '05',
+		title: 'Consultoría & Estrategia',
+		description:
+			'Diagnóstico técnico, planificación tecnológica y auditorías de arquitectura.',
+		colors: { top: '#2a1d10', left: '#1a1009', right: '#100a05' },
+	},
+];
+
+// ── Isometric geometry ────────────────────────────────────────────────────────
+// View direction: from top-front
+// We want a solid block where the front corner is the lowest visible point of the top face.
+const CX = 150;       // front-center anchor X
+const BASE_Y = 280;   // front-bottom Y of layer 0
+const W_DX = 130, W_DY = -65; // Right edge (goes up-right)
+const D_DX = -130, D_DY = -65; // Left edge (goes up-left)
+const LAYER_H = 24;
+const STEP = 36;
+// ViewBox extremes: x [20, 280], y ~[0, 280]
+
+function pts(points: [number, number][]): string {
+	return points.map(([x, y]) => `${x},${y}`).join(' ');
+}
+
+function layerGeom(i: number) {
+	const by = BASE_Y - i * STEP; // bottom-front corner Y
+	const ty = by - LAYER_H;      // top-front corner Y
+	return {
+		top: pts([
+			[CX, ty],
+			[CX + W_DX, ty + W_DY],
+			[CX + W_DX + D_DX, ty + W_DY + D_DY],
+			[CX + D_DX, ty + D_DY],
+		]),
+		left: pts([
+			[CX, ty],
+			[CX + D_DX, ty + D_DY],
+			[CX + D_DX, by + D_DY],
+			[CX, by],
+		]),
+		right: pts([
+			[CX, ty],
+			[CX + W_DX, ty + W_DY],
+			[CX + W_DX, by + W_DY],
+			[CX, by],
+		]),
+		outline: pts([
+			[CX + W_DX + D_DX, ty + W_DY + D_DY],
+			[CX + W_DX, ty + W_DY],
+			[CX + W_DX, by + W_DY],
+			[CX, by],
+			[CX + D_DX, by + D_DY],
+			[CX + D_DX, ty + D_DY],
+		]),
+	};
+}
+---
+
+<!-- ── Mobile: vertical numbered list (hidden lg+) ─────────────────────── -->
+<ol class="flex flex-col gap-3 lg:hidden">
+	{layers.map((layer) => (
+		<li class="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+			<span class="font-mono text-sm text-brand-400 tabular-nums shrink-0">{layer.label}</span>
+			<div>
+				<h3 class="font-semibold text-white">{layer.title}</h3>
+				<p class="mt-1 text-sm leading-relaxed text-gray-400">{layer.description}</p>
+			</div>
+		</li>
+	))}
+</ol>
+
+<!-- ── Desktop: isometric SVG + info panel (hidden below lg) ───────────── -->
+<div class="hidden lg:flex lg:items-center lg:gap-16">
+
+	<!-- SVG Stack -->
+	<svg
+		viewBox="0 0 300 300"
+		width="360"
+		class="flex-shrink-0 overflow-visible"
+		aria-hidden="true"
+		focusable="false"
+	>
+		{/* Draw back to front: layer 0 (bottom) to layer 4 (top) */}
+		{layers.map((layer, i) => {
+			const g = layerGeom(i);
+			return (
+				<g class="osi-layer-container" data-layer={String(i)}>
+					<g
+						class="osi-layer-visuals"
+						data-top={layer.colors.top}
+						data-left={layer.colors.left}
+						data-right={layer.colors.right}
+						style="transition:transform 200ms ease; pointer-events:none;"
+					>
+						<polygon
+							class="face-left"
+							points={g.left}
+							fill={layer.colors.left}
+							stroke="rgba(255,255,255,0.05)"
+							stroke-width="0.5"
+						/>
+						<polygon
+							class="face-right"
+							points={g.right}
+							fill={layer.colors.right}
+							stroke="rgba(255,255,255,0.04)"
+							stroke-width="0.5"
+						/>
+						<polygon
+							class="face-top"
+							points={g.top}
+							fill={layer.colors.top}
+							stroke="rgba(255,255,255,0.10)"
+							stroke-width="0.5"
+						/>
+					</g>
+					<polygon
+						class="face-hitbox"
+						points={g.outline}
+						fill="transparent"
+						style="cursor:pointer;"
+					/>
+				</g>
+			);
+		})}
+	</svg>
+
+	<!-- Info panel (List of items) -->
+	<div class="flex-1 min-w-0" id="osi-list">
+		<ol class="flex flex-col-reverse">
+			{layers.map((layer, i) => (
+				<li
+					class="osi-item py-3 cursor-pointer"
+					data-layer={String(i)}
+				>
+					<div class="osi-item-content flex items-start gap-4 transition-all duration-300 ease-in-out origin-left">
+						<span class="font-mono text-sm text-brand-400 tabular-nums shrink-0 mt-1">{layer.label}</span>
+						<div>
+							<h3 class="font-bold text-white text-xl transition-colors duration-300">{layer.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-gray-400 transition-colors duration-300">{layer.description}</p>
+						</div>
+					</div>
+				</li>
+			))}
+		</ol>
+	</div>
+</div>
+
+<script>
+	const HOVER = { top: '#7c3505', left: '#5a2604', right: '#3a1802' };
+
+	const containers = document.querySelectorAll<SVGGElement>('.osi-layer-container');
+	const items = document.querySelectorAll<HTMLElement>('.osi-item');
+
+	let activeIndex: number | null = null;
+
+	function updateList(hoveredIdx: number | null) {
+		items.forEach((item) => {
+			const idx = parseInt(item.dataset.layer ?? '-1', 10);
+			const content = item.querySelector<HTMLElement>('.osi-item-content')!;
+			
+			if (hoveredIdx === null) {
+				// No hover: all items are normally visible
+				content.style.opacity = '1';
+				content.style.transform = 'scale(1)';
+				content.style.filter = 'grayscale(0)';
+			} else if (idx === hoveredIdx) {
+				// Hovered item: highlight
+				content.style.opacity = '1';
+				content.style.transform = 'scale(1.05) translateX(10px)';
+				content.style.filter = 'grayscale(0)';
+			} else {
+				// Other items: dim
+				content.style.opacity = '0.3';
+				content.style.transform = 'scale(0.95)';
+				content.style.filter = 'grayscale(1)';
+			}
+		});
+	}
+
+	function activate(container: SVGGElement) {
+		const visuals = container.querySelector<SVGGElement>('.osi-layer-visuals')!;
+		const top = visuals.querySelector<SVGPolygonElement>('.face-top')!;
+		const left = visuals.querySelector<SVGPolygonElement>('.face-left')!;
+		const right = visuals.querySelector<SVGPolygonElement>('.face-right')!;
+
+		top.setAttribute('fill', HOVER.top);
+		top.setAttribute('stroke', 'rgba(249,115,22,0.55)');
+		top.setAttribute('stroke-width', '1');
+		left.setAttribute('fill', HOVER.left);
+		right.setAttribute('fill', HOVER.right);
+
+		visuals.style.transform = 'translateY(-5px)';
+		
+		activeIndex = parseInt(container.dataset.layer ?? '-1', 10);
+		updateList(activeIndex);
+	}
+
+	function deactivate(container: SVGGElement) {
+		const visuals = container.querySelector<SVGGElement>('.osi-layer-visuals')!;
+		const top = visuals.querySelector<SVGPolygonElement>('.face-top')!;
+		const left = visuals.querySelector<SVGPolygonElement>('.face-left')!;
+		const right = visuals.querySelector<SVGPolygonElement>('.face-right')!;
+
+		top.setAttribute('fill', visuals.dataset.top ?? '');
+		top.setAttribute('stroke', 'rgba(255,255,255,0.10)');
+		top.setAttribute('stroke-width', '0.5');
+		left.setAttribute('fill', visuals.dataset.left ?? '');
+		right.setAttribute('fill', visuals.dataset.right ?? '');
+
+		visuals.style.transform = '';
+		
+		activeIndex = null;
+		updateList(null);
+	}
+
+	containers.forEach((container) => {
+		container.addEventListener('mouseenter', () => activate(container));
+		container.addEventListener('mouseleave', () => deactivate(container));
+	});
+	
+	items.forEach((item) => {
+		item.addEventListener('mouseenter', () => {
+			const idx = parseInt(item.dataset.layer ?? '-1', 10);
+			const container = document.querySelector<SVGGElement>(`.osi-layer-container[data-layer="${idx}"]`);
+			if (container) activate(container);
+		});
+		item.addEventListener('mouseleave', () => {
+			const idx = parseInt(item.dataset.layer ?? '-1', 10);
+			const container = document.querySelector<SVGGElement>(`.osi-layer-container[data-layer="${idx}"]`);
+			if (container) deactivate(container);
+		});
+	});
+</script>
