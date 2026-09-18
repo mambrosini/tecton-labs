@@ -233,7 +233,8 @@ function layerGeom(i: number) {
 		left.setAttribute('fill', HOVER.left);
 		right.setAttribute('fill', HOVER.right);
 
-		visuals.style.transform = 'translateY(-5px)';
+		visuals.style.transform = 'translateY(-5px) translateX(-7.5px) scale(1.05)';
+		//visuals.style.transform = 'scale(1.05)';
 		
 		activeIndex = parseInt(container.dataset.layer ?? '-1', 10);
 		updateList(activeIndex);
