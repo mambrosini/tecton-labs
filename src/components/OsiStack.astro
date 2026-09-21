@@ -4,62 +4,63 @@ type Layer = {
 	label: string;
 	title: string;
 	description: string;
-	colors: { top: string; left: string; right: string };
+	tags: string[];
+	colors: { top: string; left: string; right: string; stroke: string };
 };
+
+// Base colors for inactive state (blueish-grey)
+const INACTIVE = { top: '#1c2130', left: '#10141f', right: '#0b0f17', stroke: 'rgba(255,255,255,0.1)' };
 
 const layers: Layer[] = [
 	{
 		id: 0,
 		label: '01',
-		title: 'Infraestructura & Cloud',
-		description:
-			'Arquitectura cloud en AWS, Azure y GCP. CI/CD, contenedores, IaC y automatización.',
-		colors: { top: '#121828', left: '#0a1018', right: '#060910' },
+		title: 'Infraestructura',
+		description: 'Cloud, DevOps, seguridad y automatización para entornos escalables y confiables.',
+		tags: ['AWS', 'AZURE', 'DOCKER', 'KUBERNETES', 'TERRAFORM'],
+		colors: INACTIVE,
 	},
 	{
 		id: 1,
 		label: '02',
-		title: 'Datos & Seguridad',
-		description:
-			'Diseño de bases de datos, backups, gestión de secretos, SSL/TLS y estrategias de seguridad.',
-		colors: { top: '#161c2e', left: '#0e121e', right: '#080b14' },
+		title: 'Datos',
+		description: 'Diseño, procesamiento y gestión de datos para tomar mejores decisiones.',
+		tags: ['AZURE', 'SQL', 'ETL', 'ANALYTICS'],
+		colors: INACTIVE,
 	},
 	{
 		id: 2,
 		label: '03',
-		title: 'Integraciones & APIs',
-		description:
-			'APIs REST y GraphQL, conexión con ERPs, plataformas de pago y servicios externos.',
-		colors: { top: '#1c1b21', left: '#121118', right: '#0a0a12' },
+		title: 'Sistemas',
+		description: 'Integraciones, bases de datos, mensajería y arquitectura de sistemas distribuidos.',
+		tags: ['SQL SERVER', 'POSTGRESQL', 'RABBITMQ', 'API'],
+		colors: INACTIVE,
 	},
 	{
 		id: 3,
 		label: '04',
-		title: 'Aplicaciones Web & Móvil',
-		description:
-			'Productos digitales a medida: SaaS, portales, apps mobile y dashboards.',
-		colors: { top: '#231b18', left: '#171009', right: '#0e0906' },
+		title: 'Aplicaciones',
+		description: 'APIs, servicios y aplicaciones web y mobile para conectar y hacer crecer tu negocio.',
+		tags: ['.NET', 'NODE.JS', 'REST', 'GRAPHQL'],
+		colors: INACTIVE,
 	},
 	{
 		id: 4,
 		label: '05',
-		title: 'Consultoría & Estrategia',
-		description:
-			'Diagnóstico técnico, planificación tecnológica y auditorías de arquitectura.',
-		colors: { top: '#2a1d10', left: '#1a1009', right: '#100a05' },
+		title: 'Producto',
+		description: 'Experiencias digitales y soluciones a medida, pensadas para tus usuarios y tu negocio.',
+		tags: ['REACT', 'ANGULAR', 'TYPESCRIPT', '.NET'],
+		colors: INACTIVE,
 	},
 ];
 
 // ── Isometric geometry ────────────────────────────────────────────────────────
-// View direction: from top-front
-// We want a solid block where the front corner is the lowest visible point of the top face.
-const CX = 150;       // front-center anchor X
-const BASE_Y = 280;   // front-bottom Y of layer 0
-const W_DX = 130, W_DY = -65; // Right edge (goes up-right)
-const D_DX = -130, D_DY = -65; // Left edge (goes up-left)
-const LAYER_H = 24;
-const STEP = 36;
-// ViewBox extremes: x [20, 280], y ~[0, 280]
+const CX = 180;       // front-center anchor X
+const BASE_Y = 320;   // front-bottom Y of layer 0
+const W_DX = 150, W_DY = -75; // Right edge (goes up-right)
+const D_DX = -150, D_DY = -75; // Left edge (goes up-left)
+const LAYER_H = 26;
+const STEP = 40;
 
 function pts(points: [number, number][]): string {
 	return points.map(([x, y]) => `${x},${y}`).join(' ');
@@ -68,6 +69,11 @@ function pts(points: [number, number][]): string {
 function layerGeom(i: number) {
 	const by = BASE_Y - i * STEP; // bottom-front corner Y
 	const ty = by - LAYER_H;      // top-front corner Y
+	
+	// Right corner of the layer
+	const rx = CX + W_DX;
+	const ry = ty + W_DY + (LAYER_H / 2);
+	
 	return {
 		top: pts([
 			[CX, ty],
@@ -95,184 +101,321 @@ function layerGeom(i: number) {
 			[CX + D_DX, by + D_DY],
 			[CX + D_DX, ty + D_DY],
 		]),
+		rx,
+		ry,
 	};
 }
 ---
 
-<!-- ── Mobile: vertical numbered list (hidden lg+) ─────────────────────── -->
-<ol class="flex flex-col gap-3 lg:hidden">
-	{layers.map((layer) => (
-		<li class="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
-			<span class="font-mono text-sm text-brand-400 tabular-nums shrink-0">{layer.label}</span>
-			<div>
-				<h3 class="font-semibold text-white">{layer.title}</h3>
-				<p class="mt-1 text-sm leading-relaxed text-gray-400">{layer.description}</p>
+<div class="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24 items-center">
+	
+	<!-- Left Column: Header + SVG -->
+	<div class="flex flex-col relative">
+		<!-- Section Header -->
+		<div class="mb-12 relative z-10">
+			<div class="flex items-center gap-4 mb-6">
+				<span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Servicios</span>
+				<div class="h-px w-16 bg-white/20"></div>
 			</div>
-		</li>
-	))}
-</ol>
+			<h2 class="text-4xl font-bold text-white sm:text-5xl leading-tight">
+				Construimos desde<br>los cimientos.
+			</h2>
+			<p class="mt-6 text-lg text-gray-400 max-w-md">
+				Software, sistemas e infraestructura diseñados para funcionar juntos. En cada capa, ingeniería y experiencia para resolver problemas reales.
+			</p>
+		</div>
 
-<!-- ── Desktop: isometric SVG + info panel (hidden below lg) ───────────── -->
-<div class="hidden lg:flex lg:items-center lg:gap-16">
+		<!-- Isometric SVG Stack -->
+		<svg
+			viewBox="-20 0 550 400"
+			class="w-full max-w-[600px] h-auto overflow-visible mx-auto lg:mx-0 lg:-ml-10"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<!-- Background Grid Base (optional styling) -->
+			<g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+				<line x1={CX} y1={BASE_Y + 40} x2={CX + 200} y2={BASE_Y + 40 - 100} />
+				<line x1={CX} y1={BASE_Y + 40} x2={CX - 200} y2={BASE_Y + 40 - 100} />
+				<line x1={CX - 50} y1={BASE_Y + 40 - 25} x2={CX - 50 + 200} y2={BASE_Y + 40 - 25 - 100} />
+				<line x1={CX + 50} y1={BASE_Y + 40 - 25} x2={CX + 50 - 200} y2={BASE_Y + 40 - 25 - 100} />
+			</g>
 
-	<!-- SVG Stack -->
-	<svg
-		viewBox="0 0 300 300"
-		width="360"
-		class="flex-shrink-0 overflow-visible"
-		aria-hidden="true"
-		focusable="false"
-	>
-		{/* Draw back to front: layer 0 (bottom) to layer 4 (top) */}
-		{layers.map((layer, i) => {
-			const g = layerGeom(i);
-			return (
-				<g class="osi-layer-container" data-layer={String(i)}>
-					<g
-						class="osi-layer-visuals"
-						data-top={layer.colors.top}
-						data-left={layer.colors.left}
-						data-right={layer.colors.right}
-						style="transition:transform 200ms ease; pointer-events:none;"
-					>
+			{layers.map((layer, i) => {
+				const g = layerGeom(i);
+				// The initial active layer
+				const isActive = false;
+				const fillTop = isActive ? '#c25a1b' : layer.colors.top;
+				const fillLeft = isActive ? '#8c3c0d' : layer.colors.left;
+				const fillRight = isActive ? '#5e2506' : layer.colors.right;
+				const strokeC = isActive ? 'rgba(249,115,22,0.8)' : layer.colors.stroke;
+				const lineOpacity = isActive ? '0.6' : '0.2';
+				const textOpacity = isActive ? '1' : '0.4';
+
+				return (
+					<g class="osi-layer-container" data-layer={String(i)}>
+						<g
+							class="osi-layer-visuals"
+							style="transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none;"
+						>
+							<polygon
+								class="face-left"
+								points={g.left}
+								fill={fillLeft}
+								stroke={strokeC}
+								stroke-width="0.5"
+								style="transition: all 300ms ease;"
+							/>
+							<polygon
+								class="face-right"
+								points={g.right}
+								fill={fillRight}
+								stroke={strokeC}
+								stroke-width="0.5"
+								style="transition: all 300ms ease;"
+							/>
+							<polygon
+								class="face-top"
+								points={g.top}
+								fill={fillTop}
+								stroke={strokeC}
+								stroke-width={isActive ? "1" : "0.5"}
+								style="transition: all 300ms ease;"
+							/>
+							
+							<!-- Connector Line & Label -->
+							<circle 
+								class="connector-dot"
+								cx={g.rx + 10} 
+								cy={g.ry} 
+								r="2.5" 
+								fill="white" 
+								opacity={lineOpacity}
+								style="transition: opacity 300ms ease;"
+							/>
+							<line 
+								class="connector-line"
+								x1={g.rx + 10} 
+								y1={g.ry} 
+								x2={g.rx + 60} 
+								y2={g.ry} 
+								stroke="white" 
+								stroke-width="1"
+								opacity={lineOpacity}
+								style="transition: opacity 300ms ease;"
+							/>
+							<text 
+								class="connector-text"
+								x={g.rx + 75} 
+								y={g.ry + 4} 
+								fill={isActive ? '#f97316' : '#9ca3af'}
+								font-family="system-ui, sans-serif" 
+								font-size="11" 
+								font-weight="700" 
+								letter-spacing="0.1em"
+								opacity={textOpacity}
+								style="transition: all 300ms ease;"
+							>
+								{layer.title.toUpperCase()}
+							</text>
+						</g>
 						<polygon
-							class="face-left"
-							points={g.left}
-							fill={layer.colors.left}
-							stroke="rgba(255,255,255,0.05)"
-							stroke-width="0.5"
-						/>
-						<polygon
-							class="face-right"
-							points={g.right}
-							fill={layer.colors.right}
-							stroke="rgba(255,255,255,0.04)"
-							stroke-width="0.5"
-						/>
-						<polygon
-							class="face-top"
-							points={g.top}
-							fill={layer.colors.top}
-							stroke="rgba(255,255,255,0.10)"
-							stroke-width="0.5"
+							class="face-hitbox"
+							points={g.outline}
+							fill="transparent"
+							style="cursor:pointer;"
 						/>
 					</g>
-					<polygon
-						class="face-hitbox"
-						points={g.outline}
-						fill="transparent"
-						style="cursor:pointer;"
-					/>
-				</g>
-			);
-		})}
-	</svg>
+				);
+			})}
+		</svg>
+	</div>
 
-	<!-- Info panel (List of items) -->
-	<div class="flex-1 min-w-0" id="osi-list">
+	<!-- Right Column: Interactive List -->
+	<div class="relative" id="osi-list">
 		<ol class="flex flex-col-reverse">
-			{layers.map((layer, i) => (
-				<li
-					class="osi-item py-3 cursor-pointer"
-					data-layer={String(i)}
-				>
-					<div class="osi-item-content flex items-start gap-4 transition-all duration-300 ease-in-out origin-left">
-						<span class="font-mono text-sm text-brand-400 tabular-nums shrink-0 mt-1">{layer.label}</span>
-						<div>
-							<h3 class="font-bold text-white text-xl transition-colors duration-300">{layer.title}</h3>
-							<p class="mt-2 text-sm leading-relaxed text-gray-400 transition-colors duration-300">{layer.description}</p>
+			{layers.map((layer, i) => {
+				const isActive = false;
+				return (
+					<li
+						class="osi-item relative group cursor-pointer"
+						data-layer={String(i)}
+					>
+						<!-- Left border highlight -->
+						<div class={`absolute left-0 top-0 bottom-0 w-[2px] transition-colors duration-300 ${isActive ? 'bg-brand-500' : 'bg-transparent group-hover:bg-brand-500/30'}`}></div>
+						
+						<!-- Top border separator (don't show on the very top visually, which is layer 4) -->
+						{i < 4 && <div class="absolute left-6 right-0 top-0 h-px bg-white/10"></div>}
+
+						<div class={`osi-item-content pl-6 pr-4 py-5 flex items-start gap-4 transition-all duration-300 ease-in-out ${isActive ? 'opacity-100' : 'opacity-100'}`}>
+							<span class={`font-mono text-lg tabular-nums shrink-0 transition-colors duration-300 ${isActive ? 'text-brand-500' : 'text-gray-500'}`}>
+								{layer.label}
+							</span>
+							<div>
+								<h3 class="font-bold text-white text-xl tracking-tight">{layer.title}</h3>
+								<p class="mt-1.5 text-sm leading-relaxed text-gray-400 max-w-sm">{layer.description}</p>
+								
+								<!-- Tech Tags -->
+								<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-bold tracking-widest text-gray-500 uppercase">
+									{layer.tags.map((tag, idx) => (
+										<>
+											<span class={isActive ? 'text-gray-400' : ''}>{tag}</span>
+											{idx < layer.tags.length - 1 && <span class="text-white/20">/</span>}
+										</>
+									))}
+								</div>
+							</div>
 						</div>
-					</div>
-				</li>
-			))}
+					</li>
+				);
+			})}
 		</ol>
 	</div>
 </div>
 
 <script>
-	const HOVER = { top: '#7c3505', left: '#5a2604', right: '#3a1802' };
+	// Colors for active/hover state
+	const ACTIVE = { top: '#c25a1b', left: '#8c3c0d', right: '#5e2506', stroke: 'rgba(249,115,22,0.8)' };
+	// Colors for inactive state
+	const INACTIVE = { top: '#1c2130', left: '#10141f', right: '#0b0f17', stroke: 'rgba(255,255,255,0.1)' };
 
 	const containers = document.querySelectorAll<SVGGElement>('.osi-layer-container');
 	const items = document.querySelectorAll<HTMLElement>('.osi-item');
+	const section = document.getElementById('osi-container'); // Need to wrap the component or add ID to the grid
 
+	// Start with no layer active
 	let activeIndex: number | null = null;
 
-	function updateList(hoveredIdx: number | null) {
+	function updateList(idx: number | null) {
 		items.forEach((item) => {
-			const idx = parseInt(item.dataset.layer ?? '-1', 10);
+			const itemIdx = parseInt(item.dataset.layer ?? '-1', 10);
 			const content = item.querySelector<HTMLElement>('.osi-item-content')!;
-			
-			if (hoveredIdx === null) {
-				// No hover: all items are normally visible
-				content.style.opacity = '1';
-				content.style.transform = 'scale(1)';
-				content.style.filter = 'grayscale(0)';
-			} else if (idx === hoveredIdx) {
-				// Hovered item: highlight
-				content.style.opacity = '1';
-				content.style.transform = 'scale(1.05) translateX(10px)';
-				content.style.filter = 'grayscale(0)';
+			const number = item.querySelector<HTMLElement>('span.font-mono')!;
+			const border = item.querySelector<HTMLElement>('.absolute.w-\\[2px\\]')!;
+			const tags = item.querySelectorAll<HTMLElement>('.text-\\[10px\\] span:not(.text-white\\/20)');
+
+			if (idx === null) {
+				// Default state (no hover)
+				content.classList.remove('opacity-40');
+				content.classList.add('opacity-100');
+				number.classList.remove('text-brand-500');
+				number.classList.add('text-gray-500');
+				border.classList.remove('bg-brand-500');
+				border.classList.add('bg-transparent');
+				tags.forEach(t => t.classList.remove('text-gray-400'));
+			} else if (itemIdx === idx) {
+				// Active
+				content.classList.remove('opacity-40');
+				content.classList.add('opacity-100');
+				number.classList.remove('text-gray-500');
+				number.classList.add('text-brand-500');
+				border.classList.remove('bg-transparent');
+				border.classList.add('bg-brand-500');
+				tags.forEach(t => t.classList.add('text-gray-400'));
 			} else {
-				// Other items: dim
-				content.style.opacity = '0.3';
-				content.style.transform = 'scale(0.95)';
-				content.style.filter = 'grayscale(1)';
+				// Inactive (dimmed)
+				content.classList.remove('opacity-100');
+				content.classList.add('opacity-40');
+				number.classList.remove('text-brand-500');
+				number.classList.add('text-gray-500');
+				border.classList.remove('bg-brand-500');
+				border.classList.add('bg-transparent');
+				tags.forEach(t => t.classList.remove('text-gray-400'));
 			}
 		});
 	}
 
-	function activate(container: SVGGElement) {
-		const visuals = container.querySelector<SVGGElement>('.osi-layer-visuals')!;
-		const top = visuals.querySelector<SVGPolygonElement>('.face-top')!;
-		const left = visuals.querySelector<SVGPolygonElement>('.face-left')!;
-		const right = visuals.querySelector<SVGPolygonElement>('.face-right')!;
+	function updateSvg(idx: number | null) {
+		containers.forEach((container) => {
+			const containerIdx = parseInt(container.dataset.layer ?? '-1', 10);
+			const visuals = container.querySelector<SVGGElement>('.osi-layer-visuals')!;
+			const top = visuals.querySelector<SVGPolygonElement>('.face-top')!;
+			const left = visuals.querySelector<SVGPolygonElement>('.face-left')!;
+			const right = visuals.querySelector<SVGPolygonElement>('.face-right')!;
+			
+			const dot = visuals.querySelector<SVGCircleElement>('.connector-dot')!;
+			const line = visuals.querySelector<SVGLineElement>('.connector-line')!;
+			const text = visuals.querySelector<SVGTextElement>('.connector-text')!;
 
-		top.setAttribute('fill', HOVER.top);
-		top.setAttribute('stroke', 'rgba(249,115,22,0.55)');
-		top.setAttribute('stroke-width', '1');
-		left.setAttribute('fill', HOVER.left);
-		right.setAttribute('fill', HOVER.right);
+			if (containerIdx === idx) {
+				// Active
+				top.setAttribute('fill', ACTIVE.top);
+				top.setAttribute('stroke', ACTIVE.stroke);
+				top.setAttribute('stroke-width', '1');
+				left.setAttribute('fill', ACTIVE.left);
+				right.setAttribute('fill', ACTIVE.right);
+				
+				visuals.style.transform = 'translateY(-8px)';
+				
+				dot.setAttribute('opacity', '0.6');
+				line.setAttribute('opacity', '0.6');
+				text.setAttribute('opacity', '1');
+				text.setAttribute('fill', '#f97316'); // brand-500
+			} else {
+				// Inactive or Default
+				top.setAttribute('fill', INACTIVE.top);
+				top.setAttribute('stroke', INACTIVE.stroke);
+				top.setAttribute('stroke-width', '0.5');
+				left.setAttribute('fill', INACTIVE.left);
+				right.setAttribute('fill', INACTIVE.right);
+				
+				visuals.style.transform = '';
 
-		visuals.style.transform = 'translateY(-5px) translateX(-7.5px) scale(1.05)';
-		//visuals.style.transform = 'scale(1.05)';
-		
-		activeIndex = parseInt(container.dataset.layer ?? '-1', 10);
-		updateList(activeIndex);
+				if (idx === null) {
+					// Default state (all visible but dimmed)
+					dot.setAttribute('opacity', '0.2');
+					line.setAttribute('opacity', '0.2');
+					text.setAttribute('opacity', '0.4');
+					text.setAttribute('fill', '#9ca3af'); // gray-400
+				} else {
+					// Another layer is active
+					dot.setAttribute('opacity', '0.2');
+					line.setAttribute('opacity', '0.2');
+					text.setAttribute('opacity', '0.4');
+					text.setAttribute('fill', '#9ca3af'); // gray-400
+				}
+			}
+		});
 	}
 
-	function deactivate(container: SVGGElement) {
-		const visuals = container.querySelector<SVGGElement>('.osi-layer-visuals')!;
-		const top = visuals.querySelector<SVGPolygonElement>('.face-top')!;
-		const left = visuals.querySelector<SVGPolygonElement>('.face-left')!;
-		const right = visuals.querySelector<SVGPolygonElement>('.face-right')!;
-
-		top.setAttribute('fill', visuals.dataset.top ?? '');
-		top.setAttribute('stroke', 'rgba(255,255,255,0.10)');
-		top.setAttribute('stroke-width', '0.5');
-		left.setAttribute('fill', visuals.dataset.left ?? '');
-		right.setAttribute('fill', visuals.dataset.right ?? '');
-
-		visuals.style.transform = '';
-		
-		activeIndex = null;
-		updateList(null);
+	function activate(idx: number | null) {
+		if (activeIndex === idx) return;
+		activeIndex = idx;
+		updateList(idx);
+		updateSvg(idx);
 	}
 
 	containers.forEach((container) => {
-		container.addEventListener('mouseenter', () => activate(container));
-		container.addEventListener('mouseleave', () => deactivate(container));
+		container.addEventListener('mouseenter', () => {
+			const idx = parseInt(container.dataset.layer ?? '-1', 10);
+			activate(idx);
+		});
 	});
 	
 	items.forEach((item) => {
 		item.addEventListener('mouseenter', () => {
 			const idx = parseInt(item.dataset.layer ?? '-1', 10);
-			const container = document.querySelector<SVGGElement>(`.osi-layer-container[data-layer="${idx}"]`);
-			if (container) activate(container);
-		});
-		item.addEventListener('mouseleave', () => {
-			const idx = parseInt(item.dataset.layer ?? '-1', 10);
-			const container = document.querySelector<SVGGElement>(`.osi-layer-container[data-layer="${idx}"]`);
-			if (container) deactivate(container);
+			activate(idx);
 		});
 	});
+
+	// Reset to default state when mouse leaves the whole section
+	// or moves over non-interactive parts (like the title)
+	const grid = document.querySelector('.grid.lg\\:grid-cols-\\[1\\.2fr_1fr\\]');
+	if (grid) {
+		grid.addEventListener('mouseleave', () => {
+			activate(null);
+		});
+		
+		grid.addEventListener('mousemove', (e) => {
+			const target = e.target as Element;
+			const isInteractive = target.closest('.osi-layer-container, .osi-item');
+			if (!isInteractive && activeIndex !== null) {
+				activate(null);
+			}
+		});
+	}
+
+	// Initialize default state
+	updateList(null);
+	updateSvg(null);
 </script>
