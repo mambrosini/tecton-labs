@@ -246,7 +246,7 @@ function layerGeom(i: number) {
 						<!-- Top border separator (don't show on the very top visually, which is layer 4) -->
 						{i < 4 && <div class="absolute left-6 right-0 top-0 h-px bg-white/10"></div>}
 
-						<div class={`osi-item-content pl-6 pr-4 py-5 flex items-start gap-4 transition-all duration-300 ease-in-out ${isActive ? 'opacity-100' : 'opacity-100'}`}>
+						<div class={`osi-item-content pl-6 pr-4 py-3 flex items-start gap-4 transition-all duration-300 ease-in-out ${isActive ? 'opacity-100' : 'opacity-100'}`}>
 							<span class={`font-mono text-lg tabular-nums shrink-0 transition-colors duration-300 ${isActive ? 'text-brand-500' : 'text-gray-500'}`}>
 								{layer.label}
 							</span>
@@ -274,9 +274,9 @@ function layerGeom(i: number) {
 
 <script>
 	// Colors for active/hover state
-	const ACTIVE = { top: '#c25a1b', left: '#8c3c0d', right: '#5e2506', stroke: 'rgba(249,115,22,0.8)' };
+	const ACTIVE = { top: '#c25a1b', left: '#8c3c0d', right: '#5e2506', stroke: 'rgba(255,255,255,0.2)' };
 	// Colors for inactive state
-	const INACTIVE = { top: '#1c2130', left: '#10141f', right: '#0b0f17', stroke: 'rgba(255,255,255,0.1)' };
+	const INACTIVE = { top: '#1c2130', left: '#10141f', right: '#0b0f17', stroke: 'rgba(255,255,255,0.2)' };
 
 	const containers = document.querySelectorAll<SVGGElement>('.osi-layer-container');
 	const items = document.querySelectorAll<HTMLElement>('.osi-item');
@@ -344,7 +344,7 @@ function layerGeom(i: number) {
 				left.setAttribute('fill', ACTIVE.left);
 				right.setAttribute('fill', ACTIVE.right);
 				
-				visuals.style.transform = 'translateY(-8px)';
+				visuals.style.transform = 'translateY(-7px)';
 				
 				dot.setAttribute('opacity', '0.6');
 				line.setAttribute('opacity', '0.6');
