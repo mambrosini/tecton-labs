@@ -1,4 +1,6 @@
 ---
+import { contact } from '../data/contact';
+
 const year = new Date().getFullYear();
 ---
 
@@ -9,10 +11,11 @@ const year = new Date().getFullYear();
 				<img src="/tecton_logo_badge_white_transparency_small.png" alt="Tecton" class="h-6 w-auto sm:h-7" />
 				<img src="/logo_white_stroke_small_header_full.png" alt="Tecton Labs" class="h-3.5 w-auto sm:h-4" />
 			</a>
-			<p>&copy; {year} Tecton Labs. Todos los derechos reservados.</p>
+			<p>&copy; {year} Tecton Labs · {contact.location}</p>
 		</div>
-		<div class="flex gap-6">
-			<a href="mailto:hola@tectonlabs.net" class="hover:text-white">hola@tectonlabs.net</a>
+		<div class="flex flex-wrap justify-center gap-6">
+			<a href={`mailto:${contact.email}`} class="hover:text-white">{contact.email}</a>
+			<a href={contact.whatsapp.url} target="_blank" rel="noopener" class="hover:text-white">WhatsApp</a>
 			<a href="#servicios" class="hover:text-white">Servicios</a>
 			<a href="#contacto" class="hover:text-white">Contacto</a>
 		</div>

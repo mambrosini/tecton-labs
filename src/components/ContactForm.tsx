@@ -1,6 +1,11 @@
 import { useState, type FormEvent } from 'react';
 
-export default function ContactForm() {
+interface Props {
+	email: string;
+}
+
+// Mientras no haya un endpoint de envío, el formulario arma el mail y abre el cliente de correo del usuario.
+export default function ContactForm({ email }: Props) {
 	const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -8,12 +13,23 @@ export default function ContactForm() {
 		const form = event.currentTarget;
 		const data = new FormData(form);
 
-		if (!data.get('name') || !data.get('email') || !data.get('message')) {
+		const name = String(data.get('name') ?? '').trim();
+		const replyTo = String(data.get('email') ?? '').trim();
+		const message = String(data.get('message') ?? '').trim();
+
+		if (!name || !replyTo || !message) {
 			setStatus('error');
 			return;
 		}
 
-		// TODO: wire up to a real endpoint (e.g. a Cloudflare Pages Function) when available.
+		// TODO: reemplazar por un endpoint real (Astro action / Cloudflare + servicio de mail).
+		const subject = `Consulta de ${name}`;
+		const body = `${message}
+
+—
+${name}
+${replyTo}`;
+		window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 		setStatus('sent');
 		form.reset();
 	}
@@ -21,7 +37,11 @@ export default function ContactForm() {
 	if (status === 'sent') {
 		return (
 			<p className="rounded-lg border border-brand-500/40 bg-brand-500/10 p-4 text-brand-200">
-				¡Gracias! Recibimos tu mensaje y te vamos a responder a la brevedad.
+				Abrimos tu aplicación de correo con el mensaje listo: solo falta enviarlo. Si no se abrió, escribinos a{' '}
+				<a href={`mailto:${email}`} className="font-semibold underline">
+					{email}
+				</a>
+				.
 			</p>
 		);
 	}
@@ -55,7 +75,7 @@ export default function ContactForm() {
 				type="submit"
 				className="justify-self-start rounded-full bg-brand-600 px-6 py-3 font-semibold text-white transition hover:bg-brand-500"
 			>
-				Enviar mensaje
+				Enviar por email
 			</button>
 		</form>
 	);

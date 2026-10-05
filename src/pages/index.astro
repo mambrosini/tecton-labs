@@ -4,6 +4,14 @@ import ContactForm from '../components/ContactForm';
 import ShaderBackground from '../components/ShaderBackground.astro';
 import DecodeHeading from '../components/DecodeHeading.astro';
 import OsiStack from '../components/OsiStack.astro';
+import { contact } from '../data/contact';
+
+// Empresas donde trabajaron los integrantes del equipo antes de Tecton Labs (no son clientes de Tecton).
+const teamExperience = [
+    { name: 'TransCore', logo: '/TransCore_Logo_FullColor-1024x262.png', class: 'h-8 sm:h-10' },
+    { name: 'BP', logo: '/bp-logo--inspired-business-media-2.png', class: 'h-16 sm:h-20' },
+    { name: 'EA Games', logo: '/png-clipart-metrostation-ea-games-logo-thumbnail.png', class: 'h-16 sm:h-20' },
+];
 ---
 
 <Layout>
@@ -62,20 +70,20 @@ import OsiStack from '../components/OsiStack.astro';
             </div>
             <div class="grid grid-cols-2 gap-4 sm:gap-6">
                 <div class="rounded-2xl border border-white/10 p-4 text-center sm:p-6">
-                    <p class="text-2xl font-bold text-white sm:text-3xl">&lt; 1 mes</p>
-                    <p class="mt-1 text-sm text-gray-400">Para tu primer MVP</p>
+                    <p class="text-2xl font-bold text-white sm:text-3xl">+10 años</p>
+                    <p class="mt-1 text-sm text-gray-400">De experiencia del equipo</p>
                 </div>
                 <div class="rounded-2xl border border-white/10 p-4 text-center sm:p-6">
-                    <p class="text-2xl font-bold text-white sm:text-3xl">+10</p>
-                    <p class="mt-1 text-sm text-gray-400">Años de experiencia</p>
+                    <p class="text-2xl font-bold text-white sm:text-3xl">Semanas</p>
+                    <p class="mt-1 text-sm text-gray-400">Hasta la primera entrega, no meses</p>
                 </div>
                 <div class="rounded-2xl border border-white/10 p-4 text-center sm:p-6">
-                    <p class="text-2xl font-bold text-white sm:text-3xl">24/7</p>
-                    <p class="mt-1 text-sm text-gray-400">Soporte para clientes activos</p>
+                    <p class="text-2xl font-bold text-white sm:text-3xl">Mendoza</p>
+                    <p class="mt-1 text-sm text-gray-400">Reuniones presenciales o remotas</p>
                 </div>
                 <div class="rounded-2xl border border-white/10 p-4 text-center sm:p-6">
-                    <p class="text-2xl font-bold text-white sm:text-3xl">100%</p>
-                    <p class="mt-1 text-sm text-gray-400">Foco en resultados</p>
+                    <p class="text-2xl font-bold text-white sm:text-3xl">End to end</p>
+                    <p class="mt-1 text-sm text-gray-400">De la infraestructura al producto</p>
                 </div>
             </div>
         </div>
@@ -83,22 +91,25 @@ import OsiStack from '../components/OsiStack.astro';
 
 	
 
-    <!-- Considera agregar un testimonio o caso de estudio aquí -->
-     <section id="experiencia" class="border-t border-white/10 bg-white/[0.02] py-24">
+    <section id="experiencia" class="border-t border-white/10 bg-white/[0.02] py-24">
         <div class="mx-auto max-w-6xl px-6 text-center">
-            <h2 class="text-3xl font-bold text-white sm:text-4xl">Nuestra Trayectoria</h2>
-            <p class="mt-6 max-w-3xl mx-auto text-gray-400">
-                A lo largo de los años, hemos construido soluciones y colaborado con organizaciones de primer nivel.
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">Experiencia del equipo</h2>
+            <p class="mx-auto mt-6 max-w-3xl text-gray-400">
+                Nuestro equipo trabajó en proyectos para empresas como:
             </p>
 
-            <div class="mt-12 flex gap-6 flex-wrap justify-center items-center">
-                <img src="/client-logo1.png" alt="Client Logo 1" class="h-32 w-auto object-contain" />
-                <img src="/client-logo2.png" alt="Client Logo 2" class="h-32 w-auto object-contain" />
-                <img src="/client-logo3.png" alt="Client Logo 3" class="h-32 w-auto object-contain" />
-                <!-- Add more client logos as needed -->
-
-            </div>
-
+            <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
+                {teamExperience.map((company) => (
+                    <li>
+                        <img
+                            src={company.logo}
+                            alt={company.name}
+                            class={`${company.class} w-auto object-contain opacity-60 brightness-0 invert transition hover:opacity-100`}
+                            loading="lazy"
+                        />
+                    </li>
+                ))}
+            </ul>
         </div>
     </section>
 
@@ -111,7 +122,7 @@ import OsiStack from '../components/OsiStack.astro';
                 <div>
                     <h2 class="text-3xl font-bold text-white sm:text-4xl">¿Listo para construir?</h2>
                     <p class="mt-4 text-lg text-gray-400 max-w-md">
-                        Contanos qué necesitás. Analizamos tu caso y agendamos una videollamada para definir el mejor enfoque técnico para tu producto.
+                        Contanos qué necesitás. Analizamos tu caso y coordinamos una reunión, presencial o por videollamada, para definir el mejor enfoque técnico para tu producto.
                     </p>
                     
                     <div class="mt-10 space-y-6">
@@ -124,20 +135,35 @@ import OsiStack from '../components/OsiStack.astro';
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Email directo</p>
-                                <a href="mailto:hola@tectonlabs.net" class="text-lg font-semibold text-white transition hover:text-brand-400">hola@tectonlabs.net</a>
+                                <a href={`mailto:${contact.email}`} class="text-lg font-semibold text-white transition hover:text-brand-400">{contact.email}</a>
                             </div>
                         </div>
 
-                        <!-- Availability / Timezone -->
+                        <!-- WhatsApp -->
                         <div class="flex items-center gap-4">
                             <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.02]">
                                 <svg class="h-5 w-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-500">Disponibilidad</p>
-                                <p class="text-lg font-semibold text-white">GMT-3 (América Latina)</p>
+                                <p class="text-sm font-medium text-gray-500">WhatsApp</p>
+                                <a href={contact.whatsapp.url} target="_blank" rel="noopener" class="text-lg font-semibold text-white transition hover:text-brand-400">{contact.whatsapp.display}</a>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.02]">
+                                <svg class="h-5 w-5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Ubicación</p>
+                                <p class="text-lg font-semibold text-white">{contact.location}</p>
+                                <p class="text-sm text-gray-400">Reuniones presenciales o remotas</p>
                             </div>
                         </div>
                     </div>
@@ -145,21 +171,10 @@ import OsiStack from '../components/OsiStack.astro';
 
                 <!-- Contact Form Card -->
                 <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 sm:p-8 backdrop-blur-sm">
-                    <ContactForm client:load />
+                    <ContactForm client:load email={contact.email} />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Incluir enlace al mapa del sitio -->
-    <footer class="py-6 border-t border-white/10 bg-white/[0.02]">
-        <div class="mx-auto max-w-6xl px-6 text-center">
-            <p>© 2026 Tecton Labs. Todos los derechos reservados.</p>
-            <nav class="mt-4">
-                <a href="#contacto" class="text-gray-400 hover:text-white">Contacto</a>
-                <span class="mx-3 text-gray-400">|</span>
-                <a href="/terms" class="text-gray-400 hover:text-white">Términos y Condiciones</a>
-            </nav>
-        </div>
-    </footer>
 </Layout>
