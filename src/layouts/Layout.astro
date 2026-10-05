@@ -19,7 +19,7 @@ const { title = t.meta.title, description = t.meta.description } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 // Imagen para previews al compartir el link (1200x630).
-const ogImage = new URL('/links_image.jpg', Astro.site ?? Astro.url);
+const ogImage = new URL('/links_image.jpg?v=2', Astro.site ?? Astro.url);
 
 const organization = {
 	'@context': 'https://schema.org',

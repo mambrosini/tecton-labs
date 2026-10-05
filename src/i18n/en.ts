@@ -3,7 +3,7 @@ import type { Dictionary } from './es';
 // Borrador: todavía no se publica /en/ (ver docs/plan-mejoras-contenido.md).
 export const en: Dictionary = {
 	meta: {
-		title: 'Tecton Labs — Software engineering from Mendoza, Argentina',
+		title: 'Tecton Labs — Software & Infrastructure in Mendoza, Argentina',
 		description:
 			'We build, modernize and operate software for businesses: custom applications, integrations, and cloud and on-premises infrastructure. Team based in Mendoza, Argentina.',
 		ogLocale: 'en_US',

@@ -1,6 +1,6 @@
 export const es = {
 	meta: {
-		title: 'Tecton Labs — Desarrollo de software en Mendoza',
+		title: 'Tecton Labs — Software e Infraestructura en Mendoza',
 		description:
 			'Construimos, modernizamos y operamos software para empresas: aplicaciones a medida, integraciones e infraestructura cloud y on-premise. Equipo en Mendoza, Argentina.',
 		ogLocale: 'es_AR',
