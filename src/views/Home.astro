@@ -4,6 +4,7 @@ import ShaderBackground from '../components/ShaderBackground.astro';
 import DecodeHeading from '../components/DecodeHeading.astro';
 import OsiStack from '../components/OsiStack.astro';
 import { contact } from '../data/contact';
+import { team } from '../data/team';
 import { useTranslations } from '../i18n';
 
 const t = useTranslations(Astro.currentLocale);
@@ -22,11 +23,19 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
 <section class="relative overflow-hidden">
     <ShaderBackground />
     <div class="absolute inset-0 bg-gradient-to-b from-ink-950/40 via-ink-950/70 to-ink-950"></div>
-    <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-16 text-center sm:pt-28">
+    <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-20 text-center sm:pt-28">
         <div class="mx-auto mb-8 flex items-center justify-center gap-4 sm:gap-6">
             <img src="/tecton_logo_badge_white_transparency.png" alt="Tecton" class="h-16 w-auto sm:h-24" />
             <img src="/logo_white_stroke_small.png" alt="Tecton Labs" class="h-8 w-auto sm:h-15" />
         </div>
+        <p class="mb-5 font-[family-name:var(--font-mono-brand)] text-xs font-bold uppercase tracking-[0.3em] text-brand-400 sm:text-sm">
+            {t.pillars.map((pillar, i) => (
+                <>
+                    {i > 0 && <span class="mx-2 text-white/30 sm:mx-3" aria-hidden="true">·</span>}
+                    {pillar}
+                </>
+            ))}
+        </p>
         <DecodeHeading
             id="hero-heading"
             text={t.hero.title}
@@ -59,17 +68,6 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
         </ul>
     </div>
 
-    <div class="relative border-t border-white/10">
-        <ol class="mx-auto grid max-w-6xl divide-y divide-white/10 px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {t.pillars.map((pillar, i) => (
-                <li class="py-6 sm:px-8 sm:py-8 sm:first:pl-0 sm:last:pr-0">
-                    <p class="font-[family-name:var(--font-mono-brand)] text-xs text-brand-400">0{i + 1}</p>
-                    <h2 class="mt-2 text-lg font-bold uppercase tracking-widest text-white">{pillar.title}</h2>
-                    <p class="mt-1 text-sm text-gray-400">{pillar.description}</p>
-                </li>
-            ))}
-        </ol>
-    </div>
 </section>
 
 <section id="servicios" class="relative overflow-hidden border-t border-white/10 bg-white/[0.02] py-24">
@@ -199,6 +197,28 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
                 </div>
             ))}
         </div>
+    </div>
+
+    <div class="mx-auto mt-16 max-w-6xl px-6">
+        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">{t.about.teamTitle}</h3>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+            {team.map((member) => (
+                <li class="flex items-center gap-5 rounded-2xl border border-white/10 p-5 sm:p-6">
+                    {member.photo ? (
+                        <img src={member.photo} alt={member.name} class="h-20 w-20 shrink-0 rounded-full object-cover" loading="lazy" />
+                    ) : (
+                        <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-brand-600 text-2xl font-bold text-white" aria-hidden="true">
+                            {member.name.split(' ').map((part) => part[0]).join('')}
+                        </div>
+                    )}
+                    <div>
+                        <p class="text-lg font-bold text-white">{member.name}</p>
+                        <p class="mt-1 text-sm text-gray-400">{t.about.roles[member.id]}</p>
+                    </div>
+                </li>
+            ))}
+        </ul>
+        <p class="mt-6 text-sm text-gray-400">{t.about.teamNote}</p>
     </div>
 </section>
 

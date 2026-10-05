@@ -25,11 +25,7 @@ export const en: Dictionary = {
 		secondaryCta: 'See services',
 		stack: ['.NET', 'React', 'Angular', 'TypeScript', 'Azure', 'AWS', 'SQL Server', 'PostgreSQL', 'Docker', 'RabbitMQ', 'CI/CD'],
 	},
-	pillars: [
-		{ title: 'Build', description: 'Custom applications, APIs and integrations.' },
-		{ title: 'Modernize', description: 'Legacy systems, architecture and migrations.' },
-		{ title: 'Run', description: 'Cloud and on-premises infrastructure, CI/CD, observability and reliability.' },
-	],
+	pillars: ['Build', 'Modernize', 'Run'],
 	services: {
 		eyebrow: 'Services',
 		title: 'Engineering, layer by layer.',
@@ -117,6 +113,12 @@ export const en: Dictionary = {
 			'We work alongside your team to design, build and operate the systems your business depends on.',
 			'You talk directly to the people who design and write the code: frequent deliveries, technical decisions explained, and tailored solutions instead of generic products.',
 		],
+		teamTitle: 'Who leads each project',
+		teamNote: 'Depending on what each project needs, we bring in trusted collaborators from our network of specialists.',
+		roles: {
+			maximiliano: 'Software engineering',
+			jorge: 'DevOps & infrastructure',
+		},
 		stats: [
 			{ value: '10+ years', label: 'Of team experience' },
 			{ value: 'Weeks', label: 'To first delivery, not months' },

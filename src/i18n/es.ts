@@ -22,11 +22,7 @@ export const es = {
 		secondaryCta: 'Ver servicios',
 		stack: ['.NET', 'React', 'Angular', 'TypeScript', 'Azure', 'AWS', 'SQL Server', 'PostgreSQL', 'Docker', 'RabbitMQ', 'CI/CD'],
 	},
-	pillars: [
-		{ title: 'Construir', description: 'Aplicaciones a medida, APIs e integraciones.' },
-		{ title: 'Modernizar', description: 'Sistemas legacy, arquitectura y migraciones.' },
-		{ title: 'Operar', description: 'Infraestructura cloud y on-premise, CI/CD, observabilidad y confiabilidad.' },
-	],
+	pillars: ['Construir', 'Modernizar', 'Operar'],
 	services: {
 		eyebrow: 'Servicios',
 		title: 'Ingeniería, capa por capa.',
@@ -115,6 +111,13 @@ export const es = {
 			'Trabajamos junto a tu equipo para diseñar, construir y operar los sistemas de los que depende tu negocio.',
 			'Hablás directamente con quienes diseñan y escriben el código: entregas frecuentes, decisiones técnicas explicadas y soluciones pensadas a medida, no productos genéricos.',
 		],
+		teamTitle: 'Quiénes lideran cada proyecto',
+		teamNote:
+			'Según lo que necesite cada proyecto, sumamos colaboradores de confianza de nuestra red de especialistas.',
+		roles: {
+			maximiliano: 'Ingeniería de software',
+			jorge: 'DevOps e infraestructura',
+		},
 		stats: [
 			{ value: '+10 años', label: 'De experiencia del equipo' },
 			{ value: 'Semanas', label: 'Hasta la primera entrega, no meses' },

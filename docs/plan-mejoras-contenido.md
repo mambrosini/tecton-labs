@@ -131,8 +131,8 @@ Revisión visual del sitio (oct 2026). Rápidos primero; el resto se decide de a
 - [x] ~~Reducir el naranja~~ → descartado: se probó y la página quedaba plana. El naranja se mantiene en numeraciones y stack de proyectos.
 
 **Requieren decisión**
-- [ ] Fotos del equipo con nombre y rol en "Nosotros" (necesita fotos y definir quiénes).
-- [ ] Sacar la franja de pilares o integrarla como una línea en el hero (hoy los servicios se cuentan 3 veces).
+- [x] Equipo en "Nosotros" ("Quiénes lideran cada proyecto" + nota sobre la red de colaboradores; sin usar "fundadores"): Maximiliano Ambrosini (ingeniería de software) y Jorge Garay (DevOps). Con fotos (`public/mambrosini.jpeg`, `public/jgaray.jpg`; datos en `src/data/team.ts`).
+- [x] Pilares integrados como línea sobre el título del hero ("Construir · Modernizar · Operar"); se quitó la franja.
 - [ ] Animación del título: acortarla, aplicarla a una palabra o sacarla.
 - [ ] Un solo logo en el hero (el grande compite con el título; ya está en el header).
 
