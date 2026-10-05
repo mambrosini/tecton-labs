@@ -18,6 +18,8 @@ const t = useTranslations(locale);
 const { title = t.meta.title, description = t.meta.description } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+// Imagen para previews al compartir el link (1200x630).
+const ogImage = new URL('/links_image.jpg', Astro.site ?? Astro.url);
 
 const organization = {
 	'@context': 'https://schema.org',
@@ -48,6 +50,12 @@ const organization = {
 		<meta property="og:url" content={canonical} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Tecton Labs" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
 		<script is:inline define:vars={{ allowSavedPalette: import.meta.env.DEV }}>
 			// En producción la marca es siempre naranja (mclaren); el PalettePicker solo existe en desarrollo.

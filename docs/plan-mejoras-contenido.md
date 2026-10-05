@@ -115,7 +115,7 @@ Reescribir con el ángulo **"Ingeniería, no outsourcing."**
 - **Header nav**: Servicios · Proceso · Experiencia · Nosotros · Contacto. Nav completa desde `md` (768 px); hamburguesa debajo.
 - **WhatsApp flotante** en mobile (`WhatsAppButton.astro`), arriba del selector de paletas.
 - **`color-scheme: dark`** en `global.css`: scrollbars y controles nativos oscuros.
-- **Pendiente**: imagen `og:image` 1200×630 para previews en WhatsApp/redes.
+- **Imagen para links compartidos**: `public/links_image.jpg` (1200×630) como `og:image` y `twitter:image`.
 - **Paletas**: solo McLaren (naranja, default) y Synthwave (magenta). El gráfico de capas toma el color activo de la paleta.
 - Bilingüe: ver sección siguiente.
 
