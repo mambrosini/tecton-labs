@@ -8,6 +8,9 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
+  // URL pública: la usan canonical, og:url y el JSON-LD (sin esto, el build deja localhost).
+  site: 'https://tectonlabs.net',
+
   integrations: [react()],
 
   i18n: {

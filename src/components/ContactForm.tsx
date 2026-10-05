@@ -55,12 +55,14 @@ ${replyTo}`;
 					type="text"
 					name="name"
 					placeholder={labels.name}
+					aria-label={labels.name}
 					className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-brand-500 focus:outline-none"
 				/>
 				<input
 					type="email"
 					name="email"
 					placeholder={labels.email}
+					aria-label={labels.email}
 					className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-brand-500 focus:outline-none"
 				/>
 			</div>
@@ -68,6 +70,7 @@ ${replyTo}`;
 				name="message"
 				rows={4}
 				placeholder={labels.message}
+				aria-label={labels.message}
 				className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-brand-500 focus:outline-none"
 			/>
 			{status === 'error' && (
