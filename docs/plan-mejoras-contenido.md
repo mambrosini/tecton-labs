@@ -110,10 +110,13 @@ Timeline horizontal de 4 pasos:
 Reescribir con el ángulo **"Ingeniería, no outsourcing."**
 "Trabajamos junto a tu equipo para diseñar, construir y operar los sistemas de los que depende tu negocio."
 
-## Fase 4 — Cierre y navegación
+## Fase 4 — Cierre y navegación — ✅ implementado (salvo og:image)
 
-- **Header nav**: Servicios · Cómo trabajamos · Casos · Nosotros · Contacto.
-- **Contacto**: mantener; considerar sumar "Respondemos en 24–48 h hábiles" en lugar de promesas de soporte 24/7.
+- **Header nav**: Servicios · Proceso · Experiencia · Nosotros · Contacto. Nav completa desde `md` (768 px); hamburguesa debajo.
+- **WhatsApp flotante** en mobile (`WhatsAppButton.astro`), arriba del selector de paletas.
+- **`color-scheme: dark`** en `global.css`: scrollbars y controles nativos oscuros.
+- **Pendiente**: imagen `og:image` 1200×630 para previews en WhatsApp/redes.
+- **Paletas**: solo McLaren (naranja, default) y Synthwave (magenta). El gráfico de capas toma el color activo de la paleta.
 - Bilingüe: ver sección siguiente.
 
 ---

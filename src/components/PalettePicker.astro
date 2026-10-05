@@ -1,7 +1,5 @@
 ---
 const palettes = [
-	{ id: 'blue', label: 'Blue Shift', swatch: '#31478a' },
-	{ id: 'legacy', label: 'Legacy', swatch: '#5f318a' },
 	{ id: 'mclaren', label: 'McLaren', swatch: '#ff8000' },
 	{ id: 'synthwave', label: 'Synthwave', swatch: '#ff2d95' },
 ];
@@ -36,7 +34,7 @@ const palettes = [
 		window.dispatchEvent(new CustomEvent('palettechange', { detail: { id } }));
 	}
 
-	const current = document.documentElement.dataset.palette || 'blue';
+	const current = document.documentElement.dataset.palette || 'mclaren';
 	buttons?.forEach((btn) => {
 		btn.dataset.active = String(btn.dataset.paletteOption === current);
 		btn.addEventListener('click', () => applyPalette(btn.dataset.paletteOption!));

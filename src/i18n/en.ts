@@ -10,6 +10,8 @@ export const en: Dictionary = {
 	},
 	nav: {
 		services: 'Services',
+		process: 'Process',
+		experience: 'Experience',
 		about: 'About',
 		contact: 'Contact',
 		cta: "Let's talk",
@@ -222,5 +224,6 @@ export const en: Dictionary = {
 	footer: {
 		services: 'Services',
 		contact: 'Contact',
+		whatsappButton: 'Message us on WhatsApp',
 	},
 };

@@ -18,32 +18,6 @@
 
 /* palette tokens: swapped at runtime via [data-palette] on <html> (see PalettePicker.astro) */
 :root,
-[data-palette='blue'] {
-  --pal-brand-50: #f1f8fb;
-  --pal-brand-100: #e1eff6;
-  --pal-brand-200: #b3e9eb;
-  --pal-brand-400: #768cb8;
-  --pal-brand-500: #31478a;
-  --pal-brand-600: #283a70;
-  --pal-brand-700: #213059;
-  --pal-brand-900: #263d50;
-  --pal-ink-950: #233849;
-  --pal-silver-300: #d1d5db;
-}
-
-[data-palette='legacy'] {
-  --pal-brand-50: #f2f1fb;
-  --pal-brand-100: #e3e1f6;
-  --pal-brand-200: #b3beeb;
-  --pal-brand-400: #9376b8;
-  --pal-brand-500: #5f318a;
-  --pal-brand-600: #4d2870;
-  --pal-brand-700: #3d2159;
-  --pal-brand-900: #2f2650;
-  --pal-ink-950: #2b2349;
-  --pal-silver-300: #d1d5db;
-}
-
 [data-palette='mclaren'] {
   --pal-brand-50: #fff4ea;
   --pal-brand-100: #ffe4cc;
@@ -72,6 +46,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sitio siempre oscuro: scrollbars y controles nativos en tema oscuro */
+  color-scheme: dark;
 }
 
 body {

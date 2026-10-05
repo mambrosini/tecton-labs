@@ -7,6 +7,8 @@ export const es = {
 	},
 	nav: {
 		services: 'Servicios',
+		process: 'Proceso',
+		experience: 'Experiencia',
 		about: 'Nosotros',
 		contact: 'Contacto',
 		cta: 'Hablemos',
@@ -220,6 +222,7 @@ export const es = {
 	footer: {
 		services: 'Servicios',
 		contact: 'Contacto',
+		whatsappButton: 'Escribinos por WhatsApp',
 	},
 };
 

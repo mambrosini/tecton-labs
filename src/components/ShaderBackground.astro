@@ -81,18 +81,6 @@
 
 		// blob colors per palette, matching the CSS custom properties in global.css
 		const PALETTE_COLORS = {
-			blue: {
-				colA: [0.192, 0.278, 0.541],
-				colB: [0.129, 0.188, 0.349],
-				colC: [0.046, 0.074, 0.095],
-				colMix: [0.351, 0.457, 0.461],
-			},
-			legacy: {
-				colA: [0.373, 0.192, 0.541],
-				colB: [0.224, 0.115, 0.325],
-				colC: [0.056, 0.046, 0.095],
-				colMix: [0.351, 0.373, 0.461],
-			},
 			mclaren: {
 				colA: [1.0, 0.502, 0.0],
 				colB: [0.639, 0.302, 0.0],
@@ -108,7 +96,7 @@
 		};
 
 		function applyPaletteColors(id) {
-			const colors = PALETTE_COLORS[id] || PALETTE_COLORS.blue;
+			const colors = PALETTE_COLORS[id] || PALETTE_COLORS.mclaren;
 			gl.useProgram(program);
 			gl.uniform3fv(colALoc, colors.colA);
 			gl.uniform3fv(colBLoc, colors.colB);
@@ -116,7 +104,7 @@
 			gl.uniform3fv(colMixLoc, colors.colMix);
 		}
 
-		applyPaletteColors(document.documentElement.dataset.palette || 'blue');
+		applyPaletteColors(document.documentElement.dataset.palette || 'mclaren');
 		window.addEventListener('palettechange', (event) => {
 			applyPaletteColors(event.detail.id);
 		});

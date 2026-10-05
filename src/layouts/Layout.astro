@@ -5,6 +5,7 @@ import { useTranslations } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PalettePicker from '../components/PalettePicker.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
 	title?: string;
@@ -47,7 +48,13 @@ const organization = {
 		<meta property="og:description" content={description} />
 		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
 		<script is:inline>
-			document.documentElement.dataset.palette = localStorage.getItem('tecton-palette') || 'blue';
+			// Paletas válidas: ver PalettePicker.astro. Un valor viejo guardado (p. ej. 'blue') cae a la default.
+			let palette = 'mclaren';
+			try {
+				const saved = localStorage.getItem('tecton-palette');
+				if (saved === 'mclaren' || saved === 'synthwave') palette = saved;
+			} catch {}
+			document.documentElement.dataset.palette = palette;
 		</script>
 	</head>
 	<body class="min-h-screen antialiased">
@@ -56,6 +63,7 @@ const organization = {
 			<slot />
 		</main>
 		<Footer />
+		<WhatsAppButton />
 		<PalettePicker />
 	</body>
 </html>
