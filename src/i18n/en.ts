@@ -115,10 +115,17 @@ export const en: Dictionary = {
 		],
 		teamTitle: 'Who leads each project',
 		teamNote: 'Depending on what each project needs, we bring in trusted collaborators from our network of specialists.',
-		roles: {
-			maximiliano: 'Software engineering',
-			jorge: 'DevOps & infrastructure',
+		members: {
+			maximiliano: {
+				role: 'Software engineering',
+				bio: 'Systems Engineer (UTN). 10+ years building and leading products in fintech, healthcare and logistics.',
+			},
+			jorge: {
+				role: 'DevOps & infrastructure',
+				bio: 'IT Solutions Tech Lead. Designs secure, high-availability infrastructure for studios and global AAA titles under ISO/IEC 27001 standards.',
+			},
 		},
+		linkedinLabel: 'LinkedIn of',
 		stats: [
 			{ value: '10+ years', label: 'Of team experience' },
 			{ value: 'Weeks', label: 'To first delivery, not months' },

@@ -198,19 +198,28 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
 
     <div class="mx-auto mt-16 max-w-6xl px-6">
         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">{t.about.teamTitle}</h3>
-        <ul class="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <ul class="mt-6 grid gap-4 lg:grid-cols-2 lg:gap-6">
             {team.map((member) => (
-                <li class="flex items-center gap-5 rounded-2xl border border-white/10 p-5 sm:p-6">
+                <li class="flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:flex-row sm:items-start sm:p-8">
                     {member.photo ? (
-                        <img src={member.photo} alt={member.name} class="h-20 w-20 shrink-0 rounded-full object-cover" loading="lazy" />
+                        <img src={member.photo} alt={member.name} class="h-28 w-28 shrink-0 rounded-full object-cover ring-2 ring-brand-500/60 ring-offset-4 ring-offset-ink-950" loading="lazy" />
                     ) : (
-                        <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-brand-600 text-2xl font-bold text-white" aria-hidden="true">
+                        <div class="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-brand-600 text-3xl font-bold text-white" aria-hidden="true">
                             {member.name.split(' ').map((part) => part[0]).join('')}
                         </div>
                     )}
-                    <div>
-                        <p class="text-lg font-bold text-white">{member.name}</p>
-                        <p class="mt-1 text-sm text-gray-400">{t.about.roles[member.id]}</p>
+                    <div class="min-w-0">
+                        <p class="font-[family-name:var(--font-mono-brand)] text-[11px] font-bold uppercase tracking-[0.2em] text-brand-400">{t.about.members[member.id].role}</p>
+                        <div class="mt-1 flex items-center gap-3">
+                            <p class="text-xl font-bold text-white">{member.name}</p>
+                            {member.linkedin && (
+                                <a href={member.linkedin} target="_blank" rel="noopener" aria-label={`${t.about.linkedinLabel} ${member.name}`} class="text-gray-400 transition hover:text-white">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" /></svg>
+                                </a>
+                            )}
+                        </div>
+                        <p class="mt-3 text-sm leading-relaxed text-gray-400">{t.about.members[member.id].bio}</p>
+                        <p class="mt-4 font-[family-name:var(--font-mono-brand)] text-[11px] text-gray-400">{member.tags.join(' · ')}</p>
                     </div>
                 </li>
             ))}

@@ -114,10 +114,17 @@ export const es = {
 		teamTitle: 'Quiénes lideran cada proyecto',
 		teamNote:
 			'Según lo que necesite cada proyecto, sumamos colaboradores de confianza de nuestra red de especialistas.',
-		roles: {
-			maximiliano: 'Ingeniería de software',
-			jorge: 'DevOps e infraestructura',
+		members: {
+			maximiliano: {
+				role: 'Ingeniería de software',
+				bio: 'Ingeniero en Sistemas (UTN). Más de 10 años desarrollando y liderando productos en fintech, salud y logística.',
+			},
+			jorge: {
+				role: 'DevOps e infraestructura',
+				bio: 'Tech Lead de soluciones de IT. Diseña infraestructura segura y de alta disponibilidad para estudios y títulos AAA de alcance global, bajo estándares ISO/IEC 27001.',
+			},
 		},
+		linkedinLabel: 'LinkedIn de',
 		stats: [
 			{ value: '+10 años', label: 'De experiencia del equipo' },
 			{ value: 'Semanas', label: 'Hasta la primera entrega, no meses' },
