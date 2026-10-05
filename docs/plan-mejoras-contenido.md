@@ -28,6 +28,8 @@ Esto aplica a la sección Trayectoria, las métricas de Nosotros y los casos de 
 
 ## Mensaje central
 
+> Infraestructura: el equipo tiene experiencia tanto en cloud como **on-premise**. No posicionar a Tecton como "solo cloud"; usar "cloud y on-premise" / "en la nube o en tus servidores".
+
 Pasar de vender *tecnologías / categorías* a vender **resultados y problemas resueltos**, con una narrativa única:
 **Build → Modernize → Run** + **ingeniería por capas** (visual del stack).
 
@@ -53,7 +55,7 @@ Pasar de vender *tecnologías / categorías* a vender **resultados y problemas r
 - **Título** (opciones):
   - "Construimos el software detrás de tu negocio." *(recomendado)*
   - "Construimos desde los cimientos."
-- **Bajada**: "Desde la arquitectura de aplicaciones hasta la infraestructura cloud, ayudamos a empresas a construir, modernizar y operar software confiable."
+- **Bajada**: "Desde la arquitectura de aplicaciones hasta la infraestructura, en la nube o en tus servidores, te ayudamos a construir, modernizar y operar software confiable."
 - **Strip de stack** debajo de los CTAs (texto mono, discreto):
   `.NET · React · Angular · TypeScript · Azure · AWS · SQL Server · PostgreSQL · Docker · RabbitMQ · CI/CD`
 - CTA secundario: "Ver servicios" → "Cómo trabajamos" o "Ver casos" cuando existan.
@@ -62,7 +64,7 @@ Pasar de vender *tecnologías / categorías* a vender **resultados y problemas r
 Tres columnas, una línea cada una:
 - **Construir** — Aplicaciones a medida, APIs e integraciones.
 - **Modernizar** — Sistemas legacy, arquitectura y migraciones.
-- **Operar** — Infraestructura cloud, CI/CD, observabilidad y confiabilidad.
+- **Operar** — Infraestructura cloud y on-premise, CI/CD, observabilidad y confiabilidad.
 
 ### 2.3 Servicios por capas (`OsiStack.astro`)
 - **Header**: "Ingeniería, capa por capa." + "Construimos y evolucionamos software desde la infraestructura hasta la experiencia de producto."
@@ -71,7 +73,7 @@ Tres columnas, una línea cada una:
 
 | Etiqueta | Título | Descripción | Tags |
 |---|---|---|---|
-| CIMIENTOS | Infraestructura | Arquitectura cloud, CI/CD, contenedores, infraestructura como código y automatización. | AWS · AZURE · DOCKER · TERRAFORM · CI/CD |
+| CIMIENTOS | Infraestructura | Infraestructura cloud, on-premise o híbrida: servidores, CI/CD, contenedores, infraestructura como código y automatización. | AWS · AZURE · ON-PREMISE · DOCKER · TERRAFORM · CI/CD |
 | SISTEMAS | Datos e integraciones | APIs, integraciones, bases de datos, mensajería y sistemas distribuidos. | .NET · SQL · RABBITMQ · REST |
 | SOFTWARE | Aplicaciones | Productos web y mobile diseñados alrededor de flujos de negocio reales. | REACT · ANGULAR · TYPESCRIPT · .NET |
 | PRODUCTO | Estrategia e ingeniería | Del discovery técnico a la arquitectura, la entrega y la mejora continua. | DISCOVERY · ARQUITECTURA · MVP · EVOLUCIÓN |
@@ -222,7 +224,7 @@ El arranque comercial apunta a empresas de Mendoza. El copy del brainstorming es
 
 ## Decisiones pendientes
 
-- [ ] Titular del hero: "Construimos el software detrás de tu negocio" vs. "Construimos desde los cimientos".
+- [x] Titular del hero: "Construimos el software detrás de tu negocio."
 - [ ] Empresas donde trabajó el equipo: ¿logos o solo nombres? ¿Cuáles se pueden mencionar?
 - [ ] Contenido real del 3er proyecto (Cloud Modernization).
 - [x] Sitio bilingüe ES/EN → sí (ver sección "Sitio bilingüe").

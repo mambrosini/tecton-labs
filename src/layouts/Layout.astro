@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { contact } from '../data/contact';
+import { useTranslations } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PalettePicker from '../components/PalettePicker.astro';
@@ -10,10 +11,10 @@ interface Props {
 	description?: string;
 }
 
-const {
-	title = 'Tecton Labs — Desarrollo de software en Mendoza',
-	description = 'Construimos, modernizamos y operamos software para empresas: aplicaciones a medida, integraciones, cloud e infraestructura. Equipo en Mendoza, Argentina.',
-} = Astro.props;
+const locale = Astro.currentLocale ?? 'es';
+const t = useTranslations(locale);
+
+const { title = t.meta.title, description = t.meta.description } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 
@@ -29,7 +30,7 @@ const organization = {
 };
 ---
 
-<html lang="es">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -40,7 +41,7 @@ const organization = {
 		<link rel="canonical" href={canonical} />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Tecton Labs" />
-		<meta property="og:locale" content="es_AR" />
+		<meta property="og:locale" content={t.meta.ogLocale} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />

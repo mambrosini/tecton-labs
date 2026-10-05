@@ -1,58 +1,12 @@
 ---
-type Layer = {
-	id: number;
-	label: string;
-	title: string;
-	description: string;
-	tags: string[];
-	colors: { top: string; left: string; right: string; stroke: string };
-};
+import { useTranslations } from '../i18n';
+
+const t = useTranslations(Astro.currentLocale);
 
 // Base colors for inactive state (blueish-grey)
 const INACTIVE = { top: '#1c2130', left: '#10141f', right: '#0b0f17', stroke: 'rgba(255,255,255,0.1)' };
 
-const layers: Layer[] = [
-	{
-		id: 0,
-		label: '01',
-		title: 'Infraestructura',
-		description: 'Cloud, DevOps, seguridad y automatización para entornos escalables y confiables.',
-		tags: ['CLOUD', 'CI/CD', 'CONTAINERS', 'OBSERVABILITY'],
-		colors: INACTIVE,
-	},
-	{
-		id: 1,
-		label: '02',
-		title: 'Datos',
-		description: 'Diseño, procesamiento y gestión de datos para tomar mejores decisiones.',
-		tags: ['BASES DE DATOS', 'SQL', 'ETL', 'ANALYTICS', 'REPORTING'],
-		colors: INACTIVE,
-	},
-	{
-		id: 2,
-		label: '03',
-		title: 'Sistemas',
-		description: 'Integraciones, bases de datos, mensajería y arquitectura de sistemas distribuidos.',
-		tags: ['API', 'INTEGRACIONES', 'MENSAJERÍA', 'AUTOMATIZACIÓN'],
-		colors: INACTIVE,
-	},
-	{
-		id: 3,
-		label: '04',
-		title: 'Aplicaciones',
-		description: 'APIs, servicios y aplicaciones web y mobile para conectar y hacer crecer tu negocio.',
-		tags: ['FRONTEND', 'BACKEND', 'UI/UX', 'BUSINESS LOGIC'],
-		colors: INACTIVE,
-	},
-	{
-		id: 4,
-		label: '05',
-		title: 'Producto',
-		description: 'Experiencias digitales y soluciones a medida, pensadas para tus usuarios y tu negocio.',
-		tags: ['SAAS', 'PORTALES', 'DASHBOARDS', 'APPS'],
-		colors: INACTIVE,
-	},
-];
+const layers = t.services.layers.map((layer) => ({ ...layer, colors: INACTIVE }));
 
 // ── Isometric geometry ────────────────────────────────────────────────────────
 const CX = 180;       // front-center anchor X
@@ -60,7 +14,7 @@ const BASE_Y = 320;   // front-bottom Y of layer 0
 const W_DX = 150, W_DY = -75; // Right edge (goes up-right)
 const D_DX = -150, D_DY = -75; // Left edge (goes up-left)
 const LAYER_H = 26;
-const STEP = 40;
+const STEP = 48;
 
 function pts(points: [number, number][]): string {
 	return points.map(([x, y]) => `${x},${y}`).join(' ');
@@ -114,14 +68,14 @@ function layerGeom(i: number) {
 		<!-- Section Header -->
 		<div class="mb-12 relative z-10">
 			<div class="flex items-center gap-4 mb-6">
-				<span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Servicios</span>
+				<span class="text-xs font-bold tracking-widest text-gray-400 uppercase">{t.services.eyebrow}</span>
 				<div class="h-px w-16 bg-white/20"></div>
 			</div>
 			<h2 class="text-4xl font-bold text-white sm:text-5xl leading-tight">
-				Construimos desde<br>los cimientos.
+				{t.services.title}
 			</h2>
 			<p class="mt-6 text-lg text-gray-400 max-w-md">
-				Software, sistemas e infraestructura diseñados para funcionar juntos. En cada capa, ingeniería y experiencia para resolver problemas reales.
+				{t.services.subtitle}
 			</p>
 		</div>
 
@@ -215,7 +169,7 @@ function layerGeom(i: number) {
 								opacity={textOpacity}
 								style="transition: all 300ms ease;"
 							>
-								{layer.title.toUpperCase()}
+								{layer.label.toUpperCase()}
 							</text>
 						</g>
 						<polygon
@@ -243,15 +197,15 @@ function layerGeom(i: number) {
 						<!-- Left border highlight -->
 						<div class={`absolute left-0 top-0 bottom-0 w-[2px] transition-colors duration-300 ${isActive ? 'bg-brand-500' : 'bg-transparent group-hover:bg-brand-500/30'}`}></div>
 						
-						<!-- Top border separator (don't show on the very top visually, which is layer 4) -->
-						{i < 4 && <div class="absolute left-6 right-0 top-0 h-px bg-white/10"></div>}
+						<!-- Top border separator (not on the topmost layer) -->
+						{i < layers.length - 1 && <div class="absolute left-6 right-0 top-0 h-px bg-white/10"></div>}
 
-						<div class={`osi-item-content pl-6 pr-4 py-3 flex items-start gap-4 transition-all duration-300 ease-in-out ${isActive ? 'opacity-100' : 'opacity-100'}`}>
-							<span class={`font-mono text-lg tabular-nums shrink-0 transition-colors duration-300 ${isActive ? 'text-brand-500' : 'text-gray-500'}`}>
-								{layer.label}
-							</span>
+						<div class="osi-item-content pl-6 pr-4 py-4 transition-all duration-300 ease-in-out opacity-100">
 							<div>
-								<h3 class="font-bold text-white text-xl tracking-tight">{layer.title}</h3>
+								<span class={`font-mono block text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${isActive ? 'text-brand-500' : 'text-gray-500'}`}>
+									{layer.label}
+								</span>
+								<h3 class="mt-1 font-bold text-white text-xl tracking-tight">{layer.title}</h3>
 								<p class="mt-1.5 text-sm leading-relaxed text-gray-400 max-w-sm">{layer.description}</p>
 								
 								<!-- Tech Tags -->
@@ -269,6 +223,7 @@ function layerGeom(i: number) {
 				);
 			})}
 		</ol>
+		<p class="mt-8 pl-6 font-mono text-xs text-gray-500">{t.services.closing}</p>
 	</div>
 </div>
 

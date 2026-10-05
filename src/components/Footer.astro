@@ -1,5 +1,8 @@
 ---
 import { contact } from '../data/contact';
+import { useTranslations } from '../i18n';
+
+const t = useTranslations(Astro.currentLocale);
 
 const year = new Date().getFullYear();
 ---
@@ -15,9 +18,9 @@ const year = new Date().getFullYear();
 		</div>
 		<div class="flex flex-wrap justify-center gap-6">
 			<a href={`mailto:${contact.email}`} class="hover:text-white">{contact.email}</a>
-			<a href={contact.whatsapp.url} target="_blank" rel="noopener" class="hover:text-white">WhatsApp</a>
-			<a href="#servicios" class="hover:text-white">Servicios</a>
-			<a href="#contacto" class="hover:text-white">Contacto</a>
+			<a href={contact.whatsapp.url(t.contact.whatsappMessage)} target="_blank" rel="noopener" class="hover:text-white">WhatsApp</a>
+			<a href="#servicios" class="hover:text-white">{t.footer.services}</a>
+			<a href="#contacto" class="hover:text-white">{t.footer.contact}</a>
 		</div>
 	</div>
 </footer>

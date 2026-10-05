@@ -10,6 +10,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [react()],
 
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: { prefixDefaultLocale: false },
+  },
+
   vite: {
     plugins: [tailwindcss()]
   },
