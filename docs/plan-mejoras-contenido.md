@@ -100,16 +100,11 @@ Timeline horizontal de 4 pasos:
 - **03 — Construir**: iteraciones cortas, comunicación directa e ingeniería de calidad productiva.
 - **04 — Operar**: no desaparecemos después del deploy; mantenemos el sistema confiable y en evolución.
 
-### 3.2 Experiencia del equipo (reemplaza/complementa "Trayectoria")
-Tres proyectos bien contados > 30 claims genéricos. Formato de tarjeta: título · industria + stack · 1–2 líneas · "Leer más →".
-
-⚠️ No son casos de Tecton Labs: presentarlos como **"Proyectos en los que trabajó nuestro equipo"**, en primera persona del equipo ("Diseñamos y evolucionamos…" solo si queda claro el encuadre de la sección), anonimizados (sin nombre de la empresa) y sin métricas de negocio confidenciales de ex empleadores. Cuando haya proyectos propios de Tecton, van en una sección aparte ("Casos") y estos pasan a segundo plano.
-- **Plataforma de pagos** — Fintech · .NET · SQL Server · RabbitMQ · Azure — servicios backend para flujos de pago entre entidades financieras, comercios y proveedores.
-- **CRM enterprise** — Salud · .NET · React/Angular · SQL Server — software para gestionar flujos de recetas y pedidos de producto.
-- **Modernización cloud** — Enterprise · Azure · CI/CD · Contenedores — *(falta contenido: completar)*.
-
-Para cada proyecto definir: contexto, desafío, rol del equipo, resultado técnico. Siempre anonimizado ("Procesador de pagos regional") y revisando acuerdos de confidencialidad con ex empleadores.
-Cada caso puede ser una página propia vía content collection (`src/content/casos/*.md`) + ruta `src/pages/casos/[slug].astro`.
+### 3.2 Experiencia del equipo — ✅ implementado
+- 3 proyectos destacados en grilla (pagos, turnos portuarios, seguridad para barrios cerrados) + "Otros proyectos" en fila con scroll horizontal (scroll-snap, botones en desktop).
+- Fuente: CV de los integrantes. Proyectos anonimizados, redactados de forma impersonal; solo se nombra a BP (app pública).
+- Datos en `src/i18n/*.ts` → `experience.projects` (`featured: true` para los destacados).
+- Pendiente: proyectos del resto del equipo (EA, on-premise). Revisar si mostrar el proyecto de pagos es compatible con el contrato laboral actual.
 
 ### 3.3 Nosotros
 Reescribir con el ángulo **"Ingeniería, no outsourcing."**
@@ -226,7 +221,7 @@ El arranque comercial apunta a empresas de Mendoza. El copy del brainstorming es
 
 - [x] Titular del hero: "Construimos el software detrás de tu negocio."
 - [ ] Empresas donde trabajó el equipo: ¿logos o solo nombres? ¿Cuáles se pueden mencionar?
-- [ ] Contenido real del 3er proyecto (Cloud Modernization).
+- [ ] Proyectos del resto del equipo (EA, infraestructura on-premise).
 - [x] Sitio bilingüe ES/EN → sí (ver sección "Sitio bilingüe").
 - [x] Español con voseo (foco inicial: clientes de Mendoza), priorizando "nosotros".
 - [x] Idioma por defecto en `/`: español (`/en/` para inglés, se publica después).

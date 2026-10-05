@@ -84,11 +84,34 @@ export const es = {
 			},
 		],
 	},
+	process: {
+		eyebrow: 'Proceso',
+		title: 'Cómo trabajamos',
+		steps: [
+			{
+				title: 'Entender',
+				description: 'Mapeamos el problema de negocio, la arquitectura existente y las restricciones.',
+			},
+			{
+				title: 'Diseñar',
+				description: 'Definimos la arquitectura y el plan de implementación antes de sumar complejidad innecesaria.',
+			},
+			{
+				title: 'Construir',
+				description: 'Iteraciones cortas, comunicación directa e ingeniería con calidad de producción.',
+			},
+			{
+				title: 'Operar',
+				description: 'No desaparecemos después del deploy: te ayudamos a mantener el sistema confiable y en evolución.',
+			},
+		],
+	},
 	about: {
-		title: 'Nosotros',
+		eyebrow: 'Nosotros',
+		title: 'Ingeniería, no outsourcing.',
 		paragraphs: [
-			'Tecton Labs nació para ayudar a empresas de todos los tamaños a resolver sus desafíos tecnológicos con soluciones pensadas a medida, no con productos genéricos.',
-			'Trabajamos como una extensión de tu equipo: comunicación directa, entregas frecuentes y compromiso con resultados medibles.',
+			'Trabajamos junto a tu equipo para diseñar, construir y operar los sistemas de los que depende tu negocio.',
+			'Hablás directamente con quienes diseñan y escriben el código: entregas frecuentes, decisiones técnicas explicadas y soluciones pensadas a medida, no productos genéricos.',
 		],
 		stats: [
 			{ value: '+10 años', label: 'De experiencia del equipo' },
@@ -98,8 +121,82 @@ export const es = {
 		],
 	},
 	experience: {
+		eyebrow: 'Experiencia',
 		title: 'Experiencia del equipo',
-		subtitle: 'Nuestro equipo trabajó en proyectos para empresas como:',
+		moreTitle: 'Otros proyectos',
+		scrollHint: 'Deslizá para ver más',
+		scrollPrev: 'Anterior',
+		scrollNext: 'Siguiente',
+		// Los destacados (featured) se muestran en grilla; el resto en una fila deslizable.
+		projects: [
+			{
+				featured: true,
+				title: 'Plataforma de pagos',
+				meta: ['Fintech', '.NET', 'RabbitMQ', 'SQL Server', 'Azure DevOps'],
+				description: 'Arquitectura, liderazgo técnico y desarrollo de una plataforma de pagos para bancos, fintechs y comercios, con desarrollo asistido por IA.',
+			},
+			{
+				featured: true,
+				title: 'Turnos portuarios',
+				meta: ['Logística', 'Angular', '.NET', 'Azure Service Bus', 'SQL Server'],
+				description: 'Sistema de turnos entre terminales portuarias y empresas de transporte, con integraciones basadas en mensajería.',
+			},
+			{
+				featured: true,
+				title: 'Seguridad para barrios cerrados',
+				meta: ['Seguridad', 'AWS', 'Kubernetes', 'Angular', '.NET'],
+				description: 'Control de accesos, visitas y velocidad para barrios cerrados, desplegado sobre AWS y Kubernetes.',
+			},
+			{
+				featured: false,
+				title: 'CRM para farmacias',
+				meta: ['Salud', 'Angular', '.NET', 'C# / F#', 'AWS'],
+				description: 'Gestión de pedidos de productos y recetas de clientes para farmacias.',
+			},
+			{
+				featured: false,
+				title: 'Gestión de peajes',
+				meta: ['Transporte', 'Angular', '.NET', 'SQL Server', 'Bitbucket Pipelines'],
+				description: 'Aplicación web para la gestión de peajes en Estados Unidos.',
+			},
+			{
+				featured: false,
+				title: 'Infraestructura de telecomunicaciones',
+				meta: ['Telecom', 'Ionic', 'React', '.NET', 'Azure Service Bus'],
+				description: 'Apps mobile y web para gestionar la instalación de estructuras de telecomunicaciones.',
+			},
+			{
+				featured: false,
+				title: 'App de combustible para BP',
+				meta: ['Energía', 'Android', 'Java', 'Jenkins'],
+				description: 'App pública para pagar combustible y servicios, como lavado, en estaciones de servicio.',
+			},
+			{
+				featured: false,
+				title: 'Banca mobile',
+				meta: ['Banca', 'Android', 'Java', '.NET Web API'],
+				description: 'Apps para que los clientes de un banco gestionen sus cuentas desde el celular.',
+			},
+			{
+				featured: false,
+				title: 'Comunicación hospitales–proveedores',
+				meta: ['Salud', 'Java', 'MySQL', 'MongoDB'],
+				description: 'Modernización de un sistema existente de comunicación entre hospitales y sus proveedores.',
+			},
+			{
+				featured: false,
+				title: 'Apps de consumo publicadas',
+				meta: ['Producto', 'Android', 'Ionic', 'Node.js', 'Firebase'],
+				description: 'Diseño y desarrollo completo de apps en Google Play: división de gastos y encuestas con dashboards de resultados.',
+			},
+			{
+				featured: false,
+				title: 'Sistema de stock',
+				meta: ['Retail', 'Java', 'MySQL'],
+				description: 'Gestión de inventario con estimación de reposición para un comercio.',
+			},
+		],
+		companiesIntro: 'Nuestro equipo trabajó en proyectos para empresas como:',
 	},
 	contact: {
 		title: '¿Listo para construir?',

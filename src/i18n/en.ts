@@ -86,11 +86,34 @@ export const en: Dictionary = {
 			},
 		],
 	},
+	process: {
+		eyebrow: 'Process',
+		title: 'How we work',
+		steps: [
+			{
+				title: 'Understand',
+				description: 'We map the business problem, existing architecture and constraints.',
+			},
+			{
+				title: 'Design',
+				description: 'We define an architecture and implementation plan before creating unnecessary complexity.',
+			},
+			{
+				title: 'Build',
+				description: 'Small iterations, direct communication and production-quality engineering.',
+			},
+			{
+				title: 'Operate',
+				description: "We don't disappear after deployment: we help keep the system reliable and evolving.",
+			},
+		],
+	},
 	about: {
-		title: 'About us',
+		eyebrow: 'About',
+		title: 'Engineering, not outsourcing.',
 		paragraphs: [
-			'Tecton Labs helps companies of every size solve their technology challenges with tailored solutions, not generic products.',
-			'We work as an extension of your team: direct communication, frequent deliveries and a commitment to measurable results.',
+			'We work alongside your team to design, build and operate the systems your business depends on.',
+			'You talk directly to the people who design and write the code: frequent deliveries, technical decisions explained, and tailored solutions instead of generic products.',
 		],
 		stats: [
 			{ value: '10+ years', label: 'Of team experience' },
@@ -100,8 +123,82 @@ export const en: Dictionary = {
 		],
 	},
 	experience: {
+		eyebrow: 'Experience',
 		title: 'Team experience',
-		subtitle: 'Our team has worked on projects for companies such as:',
+		moreTitle: 'More projects',
+		scrollHint: 'Swipe to see more',
+		scrollPrev: 'Previous',
+		scrollNext: 'Next',
+		// Los destacados (featured) se muestran en grilla; el resto en una fila deslizable.
+		projects: [
+			{
+				featured: true,
+				title: 'Payment platform',
+				meta: ['Fintech', '.NET', 'RabbitMQ', 'SQL Server', 'Azure DevOps'],
+				description: 'Architecture, technical leadership and development of a payment platform for banks, fintechs and merchants, with AI-assisted development.',
+			},
+			{
+				featured: true,
+				title: 'Port scheduling',
+				meta: ['Logistics', 'Angular', '.NET', 'Azure Service Bus', 'SQL Server'],
+				description: 'Scheduling system between port terminals and trucking companies, with messaging-based integrations.',
+			},
+			{
+				featured: true,
+				title: 'Gated community security',
+				meta: ['Security', 'AWS', 'Kubernetes', 'Angular', '.NET'],
+				description: 'Access, visitor and speed control for gated communities, running on AWS and Kubernetes.',
+			},
+			{
+				featured: false,
+				title: 'Pharmacy CRM',
+				meta: ['Healthcare', 'Angular', '.NET', 'C# / F#', 'AWS'],
+				description: 'Product-order and prescription management for pharmacies.',
+			},
+			{
+				featured: false,
+				title: 'Toll management',
+				meta: ['Transportation', 'Angular', '.NET', 'SQL Server', 'Bitbucket Pipelines'],
+				description: 'Web application for toll management in the United States.',
+			},
+			{
+				featured: false,
+				title: 'Telecom infrastructure',
+				meta: ['Telecom', 'Ionic', 'React', '.NET', 'Azure Service Bus'],
+				description: 'Mobile and web apps to manage the setup of telecommunication structures.',
+			},
+			{
+				featured: false,
+				title: 'Fueling app for BP',
+				meta: ['Energy', 'Android', 'Java', 'Jenkins'],
+				description: 'Public app to pay for fuel and services, such as car wash, at gas stations.',
+			},
+			{
+				featured: false,
+				title: 'Mobile banking',
+				meta: ['Banking', 'Android', 'Java', '.NET Web API'],
+				description: "Apps that let a bank's customers manage their accounts from their phones.",
+			},
+			{
+				featured: false,
+				title: 'Hospital–supplier communication',
+				meta: ['Healthcare', 'Java', 'MySQL', 'MongoDB'],
+				description: 'Modernization of an existing communication system between hospitals and their suppliers.',
+			},
+			{
+				featured: false,
+				title: 'Published consumer apps',
+				meta: ['Product', 'Android', 'Ionic', 'Node.js', 'Firebase'],
+				description: 'End-to-end design and development of Google Play apps: expense splitting and surveys with results dashboards.',
+			},
+			{
+				featured: false,
+				title: 'Inventory system',
+				meta: ['Retail', 'Java', 'MySQL'],
+				description: 'Inventory management with restocking estimates for a store.',
+			},
+		],
+		companiesIntro: 'Our team has worked on projects for companies such as:',
 	},
 	contact: {
 		title: 'Ready to build?',
