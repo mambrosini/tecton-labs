@@ -133,8 +133,8 @@ Revisión visual del sitio (oct 2026). Rápidos primero; el resto se decide de a
 **Requieren decisión**
 - [x] Equipo en "Nosotros" ("Quiénes lideran cada proyecto" + nota sobre la red de colaboradores; sin usar "fundadores"): Maximiliano Ambrosini (ingeniería de software) y Jorge Garay (DevOps). Con fotos (`public/mambrosini.jpeg`, `public/jgaray.jpg`; datos en `src/data/team.ts`).
 - [x] Pilares integrados como línea sobre el título del hero ("Construir · Modernizar · Operar"); se quitó la franja.
-- [ ] Animación del título: acortarla, aplicarla a una palabra o sacarla.
-- [ ] Un solo logo en el hero (el grande compite con el título; ya está en el header).
+- [x] Animación del título: se mantiene como está (~0,5 s, respeta reduced-motion).
+- [x] Hero solo con el badge (sin wordmark); el nombre queda en el header.
 
 **Rediseño moderado**
 - [ ] Variar el tratamiento de secciones (hoy todo es tarjeta con borde); p. ej. problemas como lista tipográfica.
