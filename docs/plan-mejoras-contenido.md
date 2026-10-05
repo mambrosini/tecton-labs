@@ -121,6 +121,28 @@ Reescribir con el ángulo **"Ingeniería, no outsourcing."**
 
 ---
 
+## Fase 5 — Diseño
+
+Revisión visual del sitio (oct 2026). Rápidos primero; el resto se decide de a uno.
+
+**Rápidos**
+- [x] Selector de paletas solo en desarrollo; en producción la marca es siempre naranja.
+- [x] Contraste: textos secundarios de `gray-500` a `gray-400`, etiquetas de 10 a 11 px, etiquetas del gráfico más visibles.
+- [x] ~~Reducir el naranja~~ → descartado: se probó y la página quedaba plana. El naranja se mantiene en numeraciones y stack de proyectos.
+
+**Requieren decisión**
+- [ ] Fotos del equipo con nombre y rol en "Nosotros" (necesita fotos y definir quiénes).
+- [ ] Sacar la franja de pilares o integrarla como una línea en el hero (hoy los servicios se cuentan 3 veces).
+- [ ] Animación del título: acortarla, aplicarla a una palabra o sacarla.
+- [ ] Un solo logo en el hero (el grande compite con el título; ya está en el header).
+
+**Rediseño moderado**
+- [ ] Variar el tratamiento de secciones (hoy todo es tarjeta con borde); p. ej. problemas como lista tipográfica.
+- [ ] Gráfico de capas con estado por defecto o recorrido automático (en mobile no hay hover).
+- [ ] Métricas de Nosotros que no son números → lista de principios.
+
+---
+
 ## Sitio bilingüe ES / EN (transversal)
 
 **Por qué:** el foco inicial es local, pero la experiencia del equipo es internacional (TransCore, EA) y el copy en inglés ya está escrito en el brainstorming. Tener `/en/` sirve como respaldo de credibilidad y deja la puerta abierta a clientes de EE.UU./Europa más adelante.

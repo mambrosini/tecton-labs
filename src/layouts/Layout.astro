@@ -47,12 +47,13 @@ const organization = {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
-		<script is:inline>
+		<script is:inline define:vars={{ allowSavedPalette: import.meta.env.DEV }}>
+			// En producción la marca es siempre naranja (mclaren); el PalettePicker solo existe en desarrollo.
 			// Paletas válidas: ver PalettePicker.astro. Un valor viejo guardado (p. ej. 'blue') cae a la default.
 			let palette = 'mclaren';
 			try {
 				const saved = localStorage.getItem('tecton-palette');
-				if (saved === 'mclaren' || saved === 'synthwave') palette = saved;
+				if (allowSavedPalette && (saved === 'mclaren' || saved === 'synthwave')) palette = saved;
 			} catch {}
 			document.documentElement.dataset.palette = palette;
 		</script>
@@ -64,6 +65,6 @@ const organization = {
 		</main>
 		<Footer />
 		<WhatsAppButton />
-		<PalettePicker />
+		{import.meta.env.DEV && <PalettePicker />}
 	</body>
 </html>
