@@ -13,6 +13,7 @@ export const es = {
 		contact: 'Contacto',
 		cta: 'Hablemos',
 		openMenu: 'Abrir menú',
+		language: 'Idioma',
 	},
 	hero: {
 		title: 'Construimos el software detrás de tu negocio.',
@@ -127,7 +128,7 @@ export const es = {
 		linkedinLabel: 'LinkedIn de',
 		stats: [
 			{ value: '+10 años', label: 'De experiencia del equipo' },
-			{ value: 'Semanas', label: 'Hasta la primera entrega, no meses' },
+			{ value: 'Cloud + on‑premise', label: 'Tu infraestructura, donde la necesites' },
 			{ value: 'Mendoza', label: 'Reuniones presenciales o remotas' },
 			{ value: 'End to end', label: 'De la infraestructura al producto' },
 		],
@@ -233,6 +234,12 @@ export const es = {
 		services: 'Servicios',
 		contact: 'Contacto',
 		whatsappButton: 'Escribinos por WhatsApp',
+	},
+	whatsappWidget: {
+		status: 'Respondemos en el día',
+		greeting: '¡Hola! 👋 ¿En qué te podemos ayudar?',
+		cta: 'Chatear por WhatsApp',
+		close: 'Cerrar',
 	},
 };
 

@@ -1,3 +1,4 @@
+export { localeStorageKey } from './preference';
 import { en } from './en';
 import { es, type Dictionary } from './es';
 
@@ -12,4 +13,10 @@ function isLocale(value: string | undefined): value is Locale {
 
 export function useTranslations(locale: string | undefined): Dictionary {
 	return dictionaries[isLocale(locale) ? locale : defaultLocale];
+}
+
+export const locales = Object.keys(dictionaries) as Locale[];
+
+export function localePath(locale: Locale): string {
+	return locale === defaultLocale ? '/' : `/${locale}/`;
 }

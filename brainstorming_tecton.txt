@@ -1,0 +1,234 @@
+We build the software behind your business.
+
+From application architecture to cloud infrastructure, Tecton Labs helps companies build, modernize and operate reliable software.
+
+---------------
+
+BUILD
+
+Custom applications, APIs, integrations.
+
+MODERNIZE
+
+Legacy systems, architecture, migrations.
+
+RUN
+
+Cloud infrastructure, CI/CD, observability, reliability.
+
+That is a much tighter story than five unrelated service categories.
+
+
+---------------
+
+
+Engineering, not outsourcing.
+
+We work alongside your team to design, build and operate the systems your business depends on.
+
+
+---------------
+
+.NET · React · Angular · TypeScript · Azure · AWS · SQL Server · PostgreSQL · Docker · RabbitMQ · CI/CD
+
+
+---------------
+
+
+Your system works. But it's becoming difficult to change.
+
+Legacy modernization
+
+We help teams evolve existing .NET and enterprise systems without throwing away years of business logic.
+
+Your application works. Production is another story.
+
+Cloud & Infrastructure
+
+Architecture, CI/CD, containers, infrastructure as code, monitoring and reliability.
+
+Your systems need to talk to each other.
+
+Integrations & APIs
+
+Payments, ERPs, third-party platforms, internal services and event-driven architectures.
+
+You need to build something new.
+
+Product Engineering
+
+From MVP to production-ready applications, with the architecture needed to grow beyond the first release.
+
+That's selling outcomes/problems, rather than selling technologies.
+
+
+---------------
+
+
+01 — Understand
+
+We map the business problem, existing architecture and constraints.
+
+02 — Design
+
+We define an architecture and implementation plan before creating unnecessary complexity.
+
+03 — Build
+
+Small iterations, direct communication and production-quality engineering.
+
+04 — Operate
+
+We don't disappear after deployment. We can help keep the system reliable and evolving.
+
+That makes the company feel much more mature.
+
+
+
+---------------
+
+
+
+Payment Platform
+
+Fintech · .NET · SQL Server · RabbitMQ · Azure
+
+Designed and evolved backend services supporting payment workflows between financial institutions, merchants and service providers.
+
+[Read case study →]
+
+Enterprise CRM
+
+Healthcare · .NET · React/Angular · SQL Server
+
+Built and evolved software used to manage prescription and product-order workflows.
+
+Cloud Modernization
+
+Enterprise · Azure · CI/CD · Containers
+
+etc.
+
+You don't need 20 projects.
+
+Three excellent case studies beat 30 generic service claims.
+
+
+
+---------------
+
+
+CAPAS
+
+   PRODUCT
+            Software & Experiences
+          ───────────────────────────
+             APPLICATIONS
+          Web · Mobile · APIs · SaaS
+        ───────────────────────────────
+              SYSTEMS
+        Data · Integrations · Messaging
+      ───────────────────────────────────
+            INFRASTRUCTURE
+       Cloud · DevOps · Security · CI/CD
+    ───────────────────────────────────────
+
+
+
+---------------
+
+
+
+Hover / click
+
+Hover Infrastructure:
+
+that layer rises slightly
+orange accent appears
+other layers dim
+right side says:
+
+01 — INFRASTRUCTURE
+
+Cloud architecture, CI/CD, containers, infrastructure as code and automation.
+
+AWS · Azure · GCP · Docker · Terraform
+
+Hover Systems:
+
+02 — SYSTEMS
+
+APIs, integrations, databases, messaging and distributed systems.
+
+.NET · SQL · RabbitMQ · REST · GraphQL
+
+Hover Applications:
+
+03 — APPLICATIONS
+
+Web and mobile products designed around real business workflows.
+
+React · Angular · TypeScript · .NET
+
+Then perhaps the top layer:
+
+04 — PRODUCT
+
+From technical discovery to architecture, delivery and continuous improvement.
+
+
+
+---------------
+
+
+Instead of numbering them 01–05, label them:
+
+FOUNDATION
+
+Infrastructure
+
+SYSTEMS
+
+Data & Integrations
+
+SOFTWARE
+
+Applications
+
+PRODUCT
+
+Strategy & Engineering
+
+
+
+---------------
+
+
+
+Strong products are built on strong foundations.
+
+
+---------------
+
+
+
+Currently:
+
+Servicios
+
+Un equipo multidisciplinario cubriendo todo el ciclo de vida de tu producto...
+
+I'd make it much more connected to the visual:
+
+Engineering, layer by layer.
+
+Construimos y evolucionamos software desde la infraestructura hasta la experiencia de producto.
+
+
+
+---------------
+
+
+otra idea Construimos desde los cimientos.
+
+Software, sistemas e infraestructura diseñados para funcionar juntos.

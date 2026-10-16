@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { contact } from '../data/contact';
-import { useTranslations } from '../i18n';
+import { defaultLocale, localePath, locales, localeStorageKey, useTranslations, type Locale } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PalettePicker from '../components/PalettePicker.astro';
@@ -12,7 +12,7 @@ interface Props {
 	description?: string;
 }
 
-const locale = Astro.currentLocale ?? 'es';
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 const t = useTranslations(locale);
 
 const { title = t.meta.title, description = t.meta.description } = Astro.props;
@@ -20,6 +20,10 @@ const { title = t.meta.title, description = t.meta.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 // Imagen para previews al compartir el link (1200x630).
 const ogImage = new URL('/links_image.jpg?v=3', Astro.site ?? Astro.url);
+
+// Versiones de la misma página en cada idioma (hreflang), para buscadores.
+const alternates = locales.map((alt) => ({ locale: alt, href: new URL(localePath(alt), Astro.site ?? Astro.url) }));
+const defaultHref = new URL(localePath(defaultLocale), Astro.site ?? Astro.url);
 
 const organization = {
 	'@context': 'https://schema.org',
@@ -44,6 +48,8 @@ const organization = {
 		<meta name="description" content={description} />
 		<title>{title}</title>
 		<link rel="canonical" href={canonical} />
+		{alternates.map((alt) => <link rel="alternate" hreflang={alt.locale} href={alt.href} />)}
+		<link rel="alternate" hreflang="x-default" href={defaultHref} />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Tecton Labs" />
 		<meta property="og:locale" content={t.meta.ogLocale} />
@@ -57,6 +63,26 @@ const organization = {
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
+		<script is:inline define:vars={{ isDefaultLocale: locale === defaultLocale, storageKey: localeStorageKey, enPath: localePath('en') }}>
+			// Primera visita a la home en español: si el visitante no está en un país hispanohablante
+			// (según la zona horaria del dispositivo) ni tiene el navegador en español, lo llevamos a /en/.
+			// Si ya eligió idioma con el selector, se respeta. Los bots no se redirigen (indexan ambas versiones).
+			(function () {
+				if (!isDefaultLocale) return;
+				try {
+					if (localStorage.getItem(storageKey)) return;
+				} catch {}
+				if (/bot|crawl|spider|slurp|preview|lighthouse|facebookexternalhit|whatsapp|telegram/i.test(navigator.userAgent)) return;
+				var tz = '';
+				try {
+					tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+				} catch {}
+				var spanishTz = /^(America\/(Argentina|Buenos_Aires|Catamarca|Cordoba|Jujuy|Mendoza|Rosario|Santiago|Punta_Arenas|Montevideo|Asuncion|La_Paz|Lima|Bogota|Guayaquil|Caracas|Mexico_City|Monterrey|Merida|Cancun|Chihuahua|Ciudad_Juarez|Hermosillo|Mazatlan|Tijuana|Matamoros|Ojinaga|Bahia_Banderas|Guatemala|El_Salvador|Tegucigalpa|Managua|Costa_Rica|Panama|Havana|Santo_Domingo|Puerto_Rico)|Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta|Africa\/Malabo|Pacific\/(Galapagos|Easter))/;
+				var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+				var speaksSpanish = langs.some(function (l) { return /^es/i.test(l); });
+				if (!spanishTz.test(tz) && !speaksSpanish) location.replace(enPath + location.hash);
+			})();
+		</script>
 		<script is:inline define:vars={{ allowSavedPalette: import.meta.env.DEV }}>
 			// En producción la marca es siempre naranja (mclaren); el PalettePicker solo existe en desarrollo.
 			// Paletas válidas: ver PalettePicker.astro. Un valor viejo guardado (p. ej. 'blue') cae a la default.

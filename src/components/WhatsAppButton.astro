@@ -3,18 +3,121 @@ import { contact } from '../data/contact';
 import { useTranslations } from '../i18n';
 
 const t = useTranslations(Astro.currentLocale);
+const whatsappUrl = contact.whatsapp.url(t.contact.whatsappMessage);
+
+// Logo de WhatsApp (Simple Icons, CC0).
+const whatsappIcon =
+	'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z';
 ---
 
-<!-- Solo en mobile: en desktop WhatsApp está en Contacto y el footer. -->
-<a
-	href={contact.whatsapp.url(t.contact.whatsappMessage)}
-	target="_blank"
-	rel="noopener"
-	aria-label={t.footer.whatsappButton}
-	title={t.footer.whatsappButton}
-	class="fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#25d366] text-white shadow-lg shadow-black/40 transition hover:scale-105 active:scale-95 md:hidden"
+<!-- Burbuja flotante: aparece tras unos segundos (o al scrollear) y abre una tarjeta con link a WhatsApp. -->
+<div
+	id="wa-widget"
+	class="pointer-events-none fixed bottom-4 right-4 z-50 flex translate-y-4 flex-col items-end gap-3 opacity-0 transition duration-500 [&.is-visible]:pointer-events-auto [&.is-visible]:translate-y-0 [&.is-visible]:opacity-100 md:bottom-6 md:right-6"
 >
-	<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-		<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-	</svg>
-</a>
+	<div
+		id="wa-panel"
+		role="dialog"
+		aria-label="WhatsApp"
+		class="pointer-events-none w-[min(20rem,calc(100vw-2rem))] origin-bottom-right translate-y-2 scale-95 overflow-hidden rounded-2xl border border-white/10 bg-ink-950 opacity-0 shadow-2xl shadow-black/60 transition duration-200 [&.is-open]:pointer-events-auto [&.is-open]:translate-y-0 [&.is-open]:scale-100 [&.is-open]:opacity-100"
+	>
+		<div class="flex items-center gap-3 bg-[#075e54] px-4 py-3">
+			<span class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink-950">
+				<img src="/tecton_logo_badge_white_transparency_small.png" alt="" class="h-5 w-auto" />
+				<span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[#075e54] bg-[#25d366]"></span>
+			</span>
+			<div class="min-w-0 flex-1">
+				<p class="text-sm font-semibold text-white">Tecton Labs</p>
+				<p class="text-xs text-white/70">{t.whatsappWidget.status}</p>
+			</div>
+			<button
+				id="wa-close"
+				type="button"
+				aria-label={t.whatsappWidget.close}
+				class="flex h-8 w-8 items-center justify-center rounded-full text-white/70 transition hover:bg-white/10 hover:text-white"
+			>
+				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		</div>
+		<div class="px-4 py-5">
+			<p class="w-fit max-w-[85%] rounded-2xl rounded-tl-sm bg-white/10 px-3.5 py-2.5 text-sm text-gray-100">
+				{t.whatsappWidget.greeting}
+			</p>
+			<a
+				href={whatsappUrl}
+				target="_blank"
+				rel="noopener"
+				class="mt-5 flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-4 py-2.5 text-sm font-semibold text-ink-950 transition hover:-translate-y-0.5 hover:bg-[#3ee07a] active:scale-95"
+			>
+				<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={whatsappIcon} /></svg>
+				{t.whatsappWidget.cta}
+			</a>
+		</div>
+	</div>
+
+	<button
+		id="wa-toggle"
+		type="button"
+		aria-label={t.footer.whatsappButton}
+		title={t.footer.whatsappButton}
+		aria-expanded="false"
+		aria-controls="wa-panel"
+		class="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-lg shadow-black/40 transition hover:scale-105 active:scale-95"
+	>
+		<span id="wa-pulse" class="absolute inset-0 hidden rounded-full bg-[#25d366] motion-safe:animate-ping [&.is-active]:block" aria-hidden="true"></span>
+		<svg class="relative h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={whatsappIcon} /></svg>
+	</button>
+</div>
+
+<script>
+	const widget = document.getElementById('wa-widget');
+	const panel = document.getElementById('wa-panel');
+	const toggle = document.getElementById('wa-toggle');
+	const close = document.getElementById('wa-close');
+	const pulse = document.getElementById('wa-pulse');
+
+	// Una vez que el visitante abrió la tarjeta, no volvemos a llamar la atención con el pulso.
+	const seenKey = 'tecton-wa-seen';
+	let seen = false;
+	try {
+		seen = localStorage.getItem(seenKey) === '1';
+	} catch {}
+
+	const show = () => {
+		if (widget?.classList.contains('is-visible')) return;
+		widget?.classList.add('is-visible');
+		if (!seen) {
+			pulse?.classList.add('is-active');
+			// El pulso dura unos ciclos y se apaga solo, para no distraer mientras leen.
+			setTimeout(() => pulse?.classList.remove('is-active'), 4000);
+		}
+		window.removeEventListener('scroll', onScroll);
+	};
+	const onScroll = () => {
+		if (window.scrollY > 400) show();
+	};
+	setTimeout(show, 3000);
+	window.addEventListener('scroll', onScroll, { passive: true });
+
+	const setOpen = (open: boolean) => {
+		panel?.classList.toggle('is-open', open);
+		toggle?.setAttribute('aria-expanded', String(open));
+		if (open) {
+			pulse?.classList.remove('is-active');
+			try {
+				localStorage.setItem(seenKey, '1');
+			} catch {}
+		}
+	};
+
+	toggle?.addEventListener('click', () => setOpen(!panel?.classList.contains('is-open')));
+	close?.addEventListener('click', () => setOpen(false));
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') setOpen(false);
+	});
+	document.addEventListener('click', (event) => {
+		if (!widget?.contains(event.target as Node)) setOpen(false);
+	});
+</script>

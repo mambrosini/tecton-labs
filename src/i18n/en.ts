@@ -1,6 +1,5 @@
 import type { Dictionary } from './es';
 
-// Borrador: todavía no se publica /en/ (ver docs/plan-mejoras-contenido.md).
 export const en: Dictionary = {
 	meta: {
 		title: 'Tecton Labs — Software & Infrastructure in Mendoza, Argentina',
@@ -16,6 +15,7 @@ export const en: Dictionary = {
 		contact: 'Contact',
 		cta: "Let's talk",
 		openMenu: 'Open menu',
+		language: 'Language',
 	},
 	hero: {
 		title: 'We build the software behind your business.',
@@ -128,7 +128,7 @@ export const en: Dictionary = {
 		linkedinLabel: 'LinkedIn of',
 		stats: [
 			{ value: '10+ years', label: 'Of team experience' },
-			{ value: 'Weeks', label: 'To first delivery, not months' },
+			{ value: 'Cloud + on‑premises', label: 'Your infrastructure, wherever you need it' },
 			{ value: 'GMT-3', label: 'Overlapping hours with the US & Europe' },
 			{ value: 'End to end', label: 'From infrastructure to product' },
 		],
@@ -234,5 +234,11 @@ export const en: Dictionary = {
 		services: 'Services',
 		contact: 'Contact',
 		whatsappButton: 'Message us on WhatsApp',
+	},
+	whatsappWidget: {
+		status: 'We reply the same day',
+		greeting: 'Hi! 👋 How can we help you?',
+		cta: 'Chat on WhatsApp',
+		close: 'Close',
 	},
 };

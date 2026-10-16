@@ -1,7 +1,8 @@
 ---
-import { useTranslations } from '../i18n';
+import { defaultLocale, localePath, locales, useTranslations, type Locale } from '../i18n';
 
 const t = useTranslations(Astro.currentLocale);
+const currentLocale = (Astro.currentLocale ?? defaultLocale) as Locale;
 
 const navLinks = [
 	{ href: '#servicios', label: t.nav.services },
@@ -14,7 +15,7 @@ const navLinks = [
 
 <header class="sticky top-0 z-50 border-b border-white/10 bg-ink-950/80 backdrop-blur">
 	<div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
-		<a href="/" class="flex items-center gap-3 sm:gap-3" aria-label="Tecton Labs">
+		<a href={localePath(currentLocale)} class="flex items-center gap-3 sm:gap-3" aria-label="Tecton Labs">
 			<img src="/tecton_logo_badge_white_transparency_small.png" alt="Tecton" class="h-6 w-auto sm:h-7" />
 			<img src="/logo_white_stroke_small_header_full.png" alt="Tecton Labs" class="h-3.5 w-auto sm:h-4" />
 		</a>
@@ -24,6 +25,23 @@ const navLinks = [
 			))}
 		</nav>
 		<div class="flex items-center gap-2">
+			<nav aria-label={t.nav.language} class="flex items-center rounded-full border border-white/15 p-0.5 text-xs font-semibold">
+				{locales.map((locale) => (
+					<a
+						href={localePath(locale)}
+						hreflang={locale}
+						lang={locale}
+						data-locale={locale}
+						aria-current={locale === currentLocale ? 'true' : undefined}
+						class:list={[
+							'rounded-full px-2.5 py-1 uppercase transition',
+							locale === currentLocale ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white',
+						]}
+					>
+						{locale}
+					</a>
+				))}
+			</nav>
 			<a
 				href="#contacto"
 				class="hidden rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-500 active:scale-95 md:inline-block"
@@ -58,6 +76,18 @@ const navLinks = [
 </header>
 
 <script>
+	import { localeStorageKey } from '../i18n/preference';
+
+	// Elegir idioma a mano gana sobre la detección automática (ver Layout.astro).
+	document.querySelectorAll<HTMLAnchorElement>('a[data-locale]').forEach((link) => {
+		link.addEventListener('click', () => {
+			try {
+				localStorage.setItem(localeStorageKey, link.dataset.locale ?? '');
+			} catch {}
+			link.href += location.hash;
+		});
+	});
+
 	const toggle = document.getElementById('menu-toggle');
 	const nav = document.getElementById('mobile-nav');
 

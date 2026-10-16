@@ -10,10 +10,15 @@ import { useTranslations } from '../i18n';
 const t = useTranslations(Astro.currentLocale);
 
 // Empresas donde trabajaron los integrantes del equipo antes de Tecton Labs (no son clientes de Tecton).
+// Oculto por ahora: logos de empresas donde trabajó el equipo. Cambiar a true para volver a mostrarlos.
+const showTeamCompanies = true;
+
 const teamExperience = [
     { name: 'TransCore', logo: '/TransCore_Logo_FullColor-1024x262.png', class: 'h-8 sm:h-10' },
     { name: 'BP', logo: '/bp-logo--inspired-business-media-2.png', class: 'h-16 sm:h-20' },
     { name: 'EA Games', logo: '/png-clipart-metrostation-ea-games-logo-thumbnail.png', class: 'h-16 sm:h-20' },
+    // La "e" del logo está calada (transparente) para que se lea con el filtro blanco.
+    { name: 'Advent eModal', logo: '/advent-emodal.png', class: 'h-10 sm:h-12' },
 ];
 
 const featuredProjects = t.experience.projects.filter((project) => project.featured);
@@ -158,19 +163,23 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
             ))}
         </ul>
 
-        <p class="mt-14 text-center text-gray-400">{t.experience.companiesIntro}</p>
-        <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
-            {teamExperience.map((company) => (
-                <li>
-                    <img
-                        src={company.logo}
-                        alt={company.name}
-                        class={`${company.class} w-auto object-contain opacity-60 brightness-0 invert transition hover:opacity-100`}
-                        loading="lazy"
-                    />
-                </li>
-            ))}
-        </ul>
+        {showTeamCompanies && (
+            <>
+                <p class="mt-14 text-center text-gray-400">{t.experience.companiesIntro}</p>
+                <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
+                    {teamExperience.map((company) => (
+                        <li>
+                            <img
+                                src={company.logo}
+                                alt={company.name}
+                                class={`${company.class} w-auto object-contain opacity-60 brightness-0 invert transition hover:opacity-100`}
+                                loading="lazy"
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </>
+        )}
     </div>
 </section>
 
@@ -189,7 +198,7 @@ const moreProjects = t.experience.projects.filter((project) => !project.featured
         <div class="grid grid-cols-2 gap-4 sm:gap-6">
             {t.about.stats.map((stat) => (
                 <div class="rounded-2xl border border-white/10 p-4 text-center sm:p-6">
-                    <p class="text-2xl font-bold text-white sm:text-3xl">{stat.value}</p>
+                    <p class="text-xl font-bold text-balance text-white sm:text-3xl">{stat.value}</p>
                     <p class="mt-1 text-sm text-gray-400">{stat.label}</p>
                 </div>
             ))}
