@@ -64,14 +64,17 @@ const organization = {
 		<meta name="twitter:image" content={ogImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(organization)} />
 		<script is:inline define:vars={{ isDefaultLocale: locale === defaultLocale, storageKey: localeStorageKey, enPath: localePath('en') }}>
-			// Primera visita a la home en español: si el visitante no está en un país hispanohablante
-			// (según la zona horaria del dispositivo) ni tiene el navegador en español, lo llevamos a /en/.
-			// Si ya eligió idioma con el selector, se respeta. Los bots no se redirigen (indexan ambas versiones).
+			// Home en español: si el visitante ya eligió inglés con el selector, lo llevamos a /en/.
+			// Si nunca eligió y no está en un país hispanohablante (según la zona horaria del dispositivo)
+			// ni tiene el navegador en español, también. Los bots no se redirigen (indexan ambas versiones).
 			(function () {
 				if (!isDefaultLocale) return;
+				var saved = null;
 				try {
-					if (localStorage.getItem(storageKey)) return;
+					saved = localStorage.getItem(storageKey);
 				} catch {}
+				if (saved === 'en') return location.replace(enPath + location.hash);
+				if (saved) return;
 				if (/bot|crawl|spider|slurp|preview|lighthouse|facebookexternalhit|whatsapp|telegram/i.test(navigator.userAgent)) return;
 				var tz = '';
 				try {
